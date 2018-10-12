@@ -34,6 +34,6 @@ Windows Phone uses the View-First approach to show the applications pages. The W
 A Windows Store application consists of multiple pages (similar to Windows Phone). The Window Manager is used to show the Settings Flyout only.
 
 ---
-><font color="#63aebb" face="微软雅黑">Windows 应用商店应用程序由多个页面组成（类似于Windows Phone）。窗口管理器仅用于显示设置弹出窗口。</font>
+><font color="#63aebb" face="微软雅黑">Windows 应用商店应用程序由多个页面组成（类似于 Windows Phone）。窗口管理器仅用于显示设置弹出窗口。</font>
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Design Time Support - 设计时支持](./design-time)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Design Time Support - 设计时支持](./design-time.md)

@@ -71,7 +71,7 @@ namespace YourNamespace
 </Application>
 ```
 
-**提示**: 确保删除 StartupUri 值。Caliburn.Micro 将为您处理主窗口的创建。因此，您不再需要主窗口 MainWindow.xaml.
+**提示**: 确保删除 StartupUri 值。Caliburn.Micro 将为你处理主窗口的创建。因此，你不再需要主窗口 MainWindow.xaml.
 
 ##### Windows Phone
 
@@ -98,8 +98,8 @@ namespace YourNamespace
 ```
 
 ##### WinRT
-For WinRT, the process of getting started is unfortunately quite different from the other platforms, due to significant design differences in the Windows Xaml APIs. For detailed instructions please see [Working with WinRT](./windows-runtime).
+For WinRT, the process of getting started is unfortunately quite different from the other platforms, due to significant design differences in the Windows Xaml APIs. For detailed instructions please see [Working with WinRT](./windows-runtime.md).
 
 [nuget]: http://www.nuget.org/
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Cheat Sheet - 备忘录](./cheat-sheet)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Cheat Sheet - 备忘录](./cheat-sheet.md)

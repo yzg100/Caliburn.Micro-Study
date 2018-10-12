@@ -13,7 +13,7 @@ Caliburn.Micro comes pre-bundled with an Event Aggregator, conveniently called E
 As previously mentioned we provide an implementation of Event Aggregator for you. This implementation implements the IEventAggregator interface, however, you can provide your own implementation if required. Please take a moment to familiarize yourself with the IEventAggregator signature.
 
 ---
-><font color="#63aebb" face="微软雅黑">如上所述，我们为您提供了一个事件聚合器的实现。这个实现实现了 IEventAggregator 接口，如果需要，您可以提供自己的实现。请花点时间熟悉 IEventAggregator 签名。</font>
+><font color="#63aebb" face="微软雅黑">如上所述，我们为你提供了一个事件聚合器的实现。这个实现实现了 IEventAggregator 接口，如果需要，你可以提供自己的实现。请花点时间熟悉 IEventAggregator 签名。</font>
 
 ``` csharp
 public interface IEventAggregator {
@@ -29,7 +29,7 @@ public interface IEventAggregator {
 To use the EventAggregator correctly it must exist as an application level service. This is usually achieved by creating an instance of EventAggregator as a Singleton. We recommend that you use Dependency Injection to obtain a reference to the instance although we do not enforce this. The sample below details how to create an instance of EventAggregator, add it to the IoC container included with Caliburn.Micro (although you are free to use any container you wish) and request it in a ViewModel.
 
 ---
-><font color="#63aebb" face="微软雅黑">要正确使用EventAggregator，它必须作为应用程序级别的服务存在。这通常是通过创建一个EventAggregator实例作为单例来实现的。我们建议您使用依赖注入来获取对实例的引用，尽管我们不强制执行此操作。下面的示例详细说明了如何创建EventAggregator实例，将其添加到Caliburn.Micro附带的IoC容器中（尽管您可以自由使用任何容器）并在ViewModel中请求它。</font>
+><font color="#63aebb" face="微软雅黑">要正确使用 EventAggregator，它必须作为应用程序级别的服务存在。这通常是通过创建一个 EventAggregator 实例作为单例来实现的。我们建议你使用依赖注入来获取对实例的引用，尽管我们不强制执行此操作。下面的示例详细说明了如何创建 EventAggregator 实例，将其添加到 Caliburn.Micro 附带的 IoC 容器中（尽管你可以自由使用任何容器）并在 ViewModel 中请求它。</font>
 
 ``` csharp
 // Creating the EventAggregator as a singleton.
@@ -66,7 +66,7 @@ Note that we are utilizing the Bootstrapper, and specifically the Configure meth
 Once you have obtained a reference to the EventAggregator instance you are free to begin publishing Events. An Event or message as we call it to distinguish between .Net events, can be any object you like. There is no requirement to build your Events in any specific fashion. As you can see in the sample below the Publish methods can accept any entity that derives from System.Object and will happily publish it to any interested subscribers.
 
 ---
-><font color="#63aebb" face="微软雅黑">获得对EventAggregator实例的引用后，您就可以自由地发布事件了。Event 和 message 是 .NET 的一系列事件，它可以是任何对象，无需以任何特定方式构建您的事件。正如下面的示例中所看到的，Publish 方法可以接受从 System.Object 派生的任何实体，并将其发布给任何对它感兴趣的订阅者。</font>
+><font color="#63aebb" face="微软雅黑">获得对EventAggregator实例的引用后，你就可以自由地发布事件了。Event 和 message 是 .NET 的一系列事件，它可以是任何对象，无需以任何特定方式构建你的事件。正如下面的示例中所看到的，Publish 方法可以接受从 System.Object 派生的任何实体，并将其发布给任何对它感兴趣的订阅者。</font>
 
 ``` csharp
 public class FooViewModel {
@@ -87,7 +87,7 @@ public class FooViewModel {
 By convention, the EventAggregator publishes on the UI thread (using PublishOnUIThread() method). You can override this per publish. Consider the following code below which publishes the message supplied on a background thread.
 
 ---
-><font color="#63aebb" face="微软雅黑">按照惯例，EventAggregator 在 UI 线程上发布(使用 PublishOnUIThread()方法)。您可以在每次发布时重写此命令。考虑下面的代码，它在后台线程上提供消息。</font>
+><font color="#63aebb" face="微软雅黑">按照惯例，EventAggregator 在 UI 线程上发布(使用 PublishOnUIThread()方法)。你可以在每次发布时重写此命令。考虑下面的代码，它在后台线程上提供消息。</font>
 
 ``` csharp
 _eventAggregator.Publish(new object(), action => {
@@ -111,7 +111,7 @@ IHandle<TMessage> : IHandle {
 Notice that by implementing the interface above you are forced to implement the method Handle(T message) were T is the type of message you have specified your interest in. This method is what will be called when a matching Event type is published. 
 
 ---
-><font color="#63aebb" face="微软雅黑">请注意，通过实现上面的接口，您必须实现方法Handle（T message）T是您已指定自己感兴趣的消息类型。当发布匹配的事件类型时，将调用此方法。</font>
+><font color="#63aebb" face="微软雅黑">请注意，通过实现上面的接口，你必须实现方法Handle（T message）T是你已指定自己感兴趣的消息类型。当发布匹配的事件类型时，将调用此方法。</font>
 
 ``` csharp
 public class FooViewModel : IHandle<object> {
@@ -215,7 +215,7 @@ public class FooViewModel : IHandle<object> {
 If you are using the EventAggregator with Caliburn.Micro as opposed to on it's own via Nuget, access to Coroutine support within the Event Aggregator becomes available. Coroutines are supported via the IHandleWithCoroutine<T> Interface.
 
 ---
-><font color="#63aebb" face="微软雅黑">如果您使用的是带有 Caliburn.Micro 的 EventAggregator，而不是通过 Nuget 单独使用，则可以访问Event Aggregator中的Coroutine支持。协同程序通过IHandleWithCoroutine<T>接口支持。</font>
+><font color="#63aebb" face="微软雅黑">如果你使用的是带有 Caliburn.Micro 的 EventAggregator，而不是通过 Nuget 单独使用，则可以访问Event Aggregator中的Coroutine支持。协同程序通过IHandleWithCoroutine<T>接口支持。</font>
 
 ``` csharp
 public interface IHandleWithCoroutine<TMessage> : IHandle {
@@ -249,7 +249,7 @@ public class EventWithCoroutine {
     public IResult Activate() {
         return new TaskResult(Task.Factory.StartNew(() => {
                 // Activate logic
-            }));
+        }));
     }
 
     public IResult DoWork() {
@@ -335,7 +335,7 @@ In the code above Screen is used to expose lifecycle events on the ViewModel. Mo
 In more complex scenarios it may be required to override the default handling of Handlers which have results. In this instance it is possible to swap out the existing implementation in favour of your own. First we create a new handler type.
 
 ---
-><font color="#63aebb" face="微软雅黑">在更复杂的场景中，可能需要覆盖具有结果的处理程序的默认处理。在这种情况下，可以替换现有的实现，以支持您的实现。首先，我们创建一个新的处理程序类。</font>
+><font color="#63aebb" face="微软雅黑">在更复杂的场景中，可能需要覆盖具有结果的处理程序的默认处理。在这种情况下，可以替换现有的实现，以支持你的实现。首先，我们创建一个新的处理程序类。</font>
 
 ``` csharp
 IHandleAndReturnString<T> : IHandle {
@@ -366,4 +366,4 @@ Now, any time an event is processed returns a string, it will be captured and di
 ><font color="#63aebb" face="微软雅黑">现在，每当处理一个事件返回一个字符串时，它都会被捕获并显示在一个 MessageBox 中。在无法从 String 分配结果的情况下，新处理程序将返回到默认实现。需要特别注意的是，这个特性并不是为请求/响应的使用而设计的，因此对其进行处理肯定会在发布时产生瓶颈。</font>
 
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Simple IoC Container - 简单的IoC容器](./simple-container)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Simple IoC Container - 简单的IoC容器](./simple-container.md)

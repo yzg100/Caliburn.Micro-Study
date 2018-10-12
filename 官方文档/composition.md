@@ -6,7 +6,7 @@ title: Screens, Conductors and Composition
 Actions, Coroutines and Conventions tend to draw the most attention to Caliburn.Micro, but the Screens and Conductors piece is probably most important to understand if you want your UI to be engineered well. It’s particularly important if you want to leverage composition. The terms Screen, Screen Conductor and Screen Collection have more recently been codified by Jeremy Miller during his work on the book "Presentation Patterns" for Addison Wesley. While these patterns are primarily used in CM by inheriting ViewModels from particular base classes, it’s important to think of them as roles rather than as View-Models. In fact, depending on your architecture, a Screen could be a UserControl, Presenter or ViewModel. That’s getting a little ahead of ourselves though. First, let’s talk about what these things are in general.
 
 ---
-><font color="#63aebb" face="微软雅黑">活动、协同程序和约定往往会把最多的注意力吸引到 Caliburn.Micro 上，但是如果你想让你的UI得到很好的设计，那么 Screen 和 conductor 部分可能是最重要的。如果你想利用组件，这一点尤为重要。最近，杰里米·米勒( Jeremy Miller )在为艾迪生·韦斯利( Addison Wesley )撰写《表现模式》( Presentation Patterns )一书时，将 “Screen”、 “Screen Conductor” 和 “Screen Collection” 等术语进行了编纂。虽然这些模式在 CM 中主要是通过继承特定基类的 ViewModel 来使用的，但是将它们看作任务而不是 View-Models 是很重要的。实际上，根据您的架构， Screen 可以是 UserControl、Presenter 或ViewModel。这有点超前了。首先，我们来谈谈这些内容的意义。</font>
+><font color="#63aebb" face="微软雅黑">活动、协同程序和约定往往会把最多的注意力吸引到 Caliburn.Micro 上，但是如果你想让你的UI得到很好的设计，那么 Screen 和 conductor 部分可能是最重要的。如果你想利用组件，这一点尤为重要。最近，杰里米·米勒( Jeremy Miller )在为艾迪生·韦斯利( Addison Wesley )撰写《表现模式》( Presentation Patterns )一书时，将 “Screen”、 “Screen Conductor” 和 “Screen Collection” 等术语进行了编纂。虽然这些模式在 CM 中主要是通过继承特定基类的 ViewModel 来使用的，但是将它们看作任务而不是 View-Models 是很重要的。实际上，根据你的架构， Screen 可以是 UserControl、Presenter 或ViewModel。这有点超前了。首先，我们来谈谈这些内容的意义。</font>
 
 ### Theory - 理论
 
@@ -18,27 +18,27 @@ This is the simplest construct to understand. You might think of it as a statefu
 Often times a screen has a lifecycle associated with it which allows the screen to perform custom activation and deactivation logic. This is what Jeremy calls the ScreenActivator. For example, take the Visual Studio code editor window. If you are editing a C# code file in one tab, then you switch to a tab containing an XML document, you will notice that the toolbar icons change. Each one of those screens has custom activation/deactivation logic that enables it to setup/teardown the application toolbars such that they provide the appropriate icons based on the active screen. In simple scenarios, the ScreenActivator is often the same class as the Screen. However, you should remember that these are two separate roles. If a particular screen has complex activation logic, it may be necessary to factor the ScreenActivator into its own class in order to reduce the complexity of the Screen. This is particularly important if you have an application with many different screens, but all with the same activation/deactivation logic.
 
 ---
-><font color="#63aebb" face="微软雅黑">这是最容易理解的结构。您可能认为它是存在于应用程序表示层中的有状态的工作单元。它独立于应用程序 shell。shell 可以显示许多不同的 Screen ，有些甚至同时显示。shell 还可以显示许多小部件，但这些小部件不属于任何 Screen。一些 Screen 示例可能是应用程序设置的模态对话框、Visual Studio 中的代码编辑器窗口或浏览器中的页面。你们可能对这个有直观的感受。
+><font color="#63aebb" face="微软雅黑">这是最容易理解的结构。你可能认为它是存在于应用程序表示层中的有状态的工作单元。它独立于应用程序 shell。shell 可以显示许多不同的 Screen ，有些甚至同时显示。shell 还可以显示许多小部件，但这些小部件不属于任何 Screen。一些 Screen 示例可能是应用程序设置的模态对话框、Visual Studio 中的代码编辑器窗口或浏览器中的页面。你们可能对这个有直观的感受。
 
->通常， Screen 具有与其相关联的生命周期，这允许 Screen 执行自定义激活和停用逻辑。这就是 Jeremy 所说的 ScreenActivator。例如，以 Visual Studio 代码编辑器窗口为例。如果在一个选项卡中编辑 C# 代码文件，然后切换到包含 XML 文档的选项卡，您将注意到工具栏图标发生了变化。这些 Screen 每个都具有自定义激活/停用逻辑，使其能够装配/拆卸工具栏，以便根据活动 Screen 提供适当的图标。在简单的场景中，ScreenActivator 通常与 Screen 相同。但是，您应该记住这是两个独立的角色。如果某个 Screen 具有复杂的激活逻辑，则可能需要将 ScreenActivator 分解为其自身的类，以降低 Screen 的复杂性。如果您的应用程序具有许多不同的 Screen ，但所有 Screen 都具有相同的激活/停用逻辑，那么这一点就显得尤为重要。</font>
+>通常， Screen 具有与其相关联的生命周期，这允许 Screen 执行自定义激活和停用逻辑。这就是 Jeremy 所说的 ScreenActivator。例如，以 Visual Studio 代码编辑器窗口为例。如果在一个选项卡中编辑 C# 代码文件，然后切换到包含 XML 文档的选项卡，你将注意到工具栏图标发生了变化。这些 Screen 每个都具有自定义激活/停用逻辑，使其能够装配/拆卸工具栏，以便根据活动 Screen 提供适当的图标。在简单的场景中，ScreenActivator 通常与 Screen 相同。但是，你应该记住这是两个独立的角色。如果某个 Screen 具有复杂的激活逻辑，则可能需要将 ScreenActivator 分解为其自身的类，以降低 Screen 的复杂性。如果你的应用程序具有许多不同的 Screen ，但所有 Screen 都具有相同的激活/停用逻辑，那么这一点就显得尤为重要。</font>
 
 ##### Screen Conductor
 Once you introduce the notion of a Screen Activation Lifecycle into your application, you need some way to enforce it. This is the role of the ScreenConductor. When you show a screen, the conductor makes sure it is properly activated. If you are transitioning away from a screen, it makes sure it gets deactivated. There’s another scenario that’s important as well. Suppose that you have a screen which contains unsaved data and someone tries to close that screen or even the application. The ScreenConductor, which is already enforcing deactivation, can help out by implementing Graceful Shutdown. In the same way that your Screen might implement an interface for activation/deactivation, it may also implement some interface which allows the conductor to ask it “Can you close?” This brings up an important point: in some scenarios deactivating a screen is the same as closing a screen and in others, it is different. For example, in Visual Studio, it doesn’t close documents when you switch from tab to tab. It just activates/deactivates them. You have to explicitly close the tab. That is what triggers the graceful shutdown logic. However, in a navigation based application, navigating away from a page would definitely cause deactivation, but it might also cause that page to close. It all depends on your specific application’s architecture and it’s something you should think carefully about.
 
 ---
-><font color="#63aebb" face="微软雅黑">一旦将 Screen 激活生命周期的概念引入到应用程序中，您就需要一些方法来实现它。这就是 ScreenConductor 的作用。当你显示一个 Screen 时，conductor 会确保它被正确激活。如果你离开 Screen ，它会确保它被停用。还有另一种情况也很重要。假设您有一个包含未保存数据的 Screen ，有人试图关闭该 Screen 甚至应用程序，已经强制停用的 ScreenConductor 可以通过实现优雅的帮助来关机。就像你的 Screen 可能实现一个激活/停用的接口一样，它也可能实现一些接口，允许 conductor 问它“你要关闭吗?”这就引出了一个重要的问题:在某些情况下，停用和关闭 Screen 是一样的，而在另一些情况下则不同。例如，在 Visual Studio 中，当您从一个选项卡切换到另一个选项卡时，它不会关闭文档。它只是激活/停用它们。您必须显式地关闭选项卡。这就是触发优雅关闭逻辑的原因。然而，在基于导航的应用程序中，导航离开页面肯定会导致停用，但也可能导致该页面关闭。这完全取决于您的特定应用程序的体系结构，这是您应该仔细考虑的事情。</font>
+><font color="#63aebb" face="微软雅黑">一旦将 Screen 激活生命周期的概念引入到应用程序中，你就需要一些方法来实现它。这就是 ScreenConductor 的作用。当你显示一个 Screen 时，conductor 会确保它被正确激活。如果你离开 Screen ，它会确保它被停用。还有另一种情况也很重要。假设你有一个包含未保存数据的 Screen ，有人试图关闭该 Screen 甚至应用程序，已经强制停用的 ScreenConductor 可以通过实现优雅的帮助来关机。就像你的 Screen 可能实现一个激活/停用的接口一样，它也可能实现一些接口，允许 conductor 问它“你要关闭吗?”这就引出了一个重要的问题:在某些情况下，停用和关闭 Screen 是一样的，而在另一些情况下则不同。例如，在 Visual Studio 中，当你从一个选项卡切换到另一个选项卡时，它不会关闭文档。它只是激活/停用它们。你必须显式地关闭选项卡。这就是触发优雅关闭逻辑的原因。然而，在基于导航的应用程序中，导航离开页面肯定会导致停用，但也可能导致该页面关闭。这完全取决于你的特定应用程序的体系结构，这是你应该仔细考虑的事情。</font>
 
 ##### Screen Collection
 In an application like Visual Studio, you would not only have a ScreenConductor managing activation, deactivation, etc., but would also have a ScreenCollection maintaining the list of currently opened screens or documents. By adding this piece of the puzzle, we can also solve the issue of deactivation vs. close. Anything that is in the ScreenCollection remains open, but only one of those items is active at a time. In an MDI-style application like VS, the conductor would manage switching the active screen between members of the ScreenCollection. Opening a new document would add it to the ScreenCollection and switch it to the active screen. Closing a document would not only deactivate it, but would remove it from the ScreenCollection. All that would be dependent on whether or not it answers the question “Can you close?” positively. Of course, after the document is closed, the conductor needs to decide which of the other items in the ScreenCollection should become the next active document.
 
 ---
-><font color="#63aebb" face="微软雅黑">在 Visual Studio 中，您不仅可以使用 ScreenConductor 来管理激活、停用等操作，还可以使用 ScreenCollection 来维护当前打开的 Screen 或文档列表。通过这一难题，我们还可以解决停用与关闭的问题。ScreenCollection 中的任何内容都保持打开状态，但一次只有其中一个项处于活动状态。在像 VS 这样的 MDI 风格的应用程序中，conductor 管理 ScreenCollection 的成员之间激活切换。打开一个新文档会将其添加到 ScreenCollection 中，并将其切换到激活状态。关闭文档不仅会使其停用，还会将其从 ScreenCollection 中移除。所有这些都取决于是否回答了“你要关闭吗?”。当然，在关闭文档之后， conductor 需要决定 ScreenCollection 中的其他项目中哪个应该成为下一个活动文档。</font>
+><font color="#63aebb" face="微软雅黑">在 Visual Studio 中，你不仅可以使用 ScreenConductor 来管理激活、停用等操作，还可以使用 ScreenCollection 来维护当前打开的 Screen 或文档列表。通过这一难题，我们还可以解决停用与关闭的问题。ScreenCollection 中的任何内容都保持打开状态，但一次只有其中一个项处于活动状态。在像 VS 这样的 MDI 风格的应用程序中，conductor 管理 ScreenCollection 的成员之间激活切换。打开一个新文档会将其添加到 ScreenCollection 中，并将其切换到激活状态。关闭文档不仅会使其停用，还会将其从 ScreenCollection 中移除。所有这些都取决于是否回答了“你要关闭吗?”。当然，在关闭文档之后， conductor 需要决定 ScreenCollection 中的其他项目中哪个应该成为下一个活动文档。</font>
 
 ### Implementations - 实现
 There are lots of different ways to implement these ideas. You could inherit from a TabControl and implement an IScreenConductor interface and build all the logic directly in the control. Add that to your IoC container and you’re off and running. You could implement an IScreen interface on a custom UserControl or you could implement it as a POCO used as a base for Supervising Controllers. ScreenCollection could be a custom collection with special logic for maintaining the active screen, or it could just be a simple IList<IScreen>.
 
 ---
-><font color="#63aebb" face="微软雅黑">有很多不同的方法来实现这些想法。您可以从 TabControl 继承并实现 IScreenConductor 接口，并直接在控件中构建所有逻辑。将其添加到 IoC 容器中，就可以关闭和运行了。您可以在自定义 UserControl 上实现 IScreen 接口，也可以将其实现为作为监控控制器基础的 POCO。ScreenCollection 可以是自定义集合，具有用于维护活动 Screen 的特殊逻辑，也可以是简单的 IList<IScreen>。</font>
+><font color="#63aebb" face="微软雅黑">有很多不同的方法来实现这些想法。你可以从 TabControl 继承并实现 IScreenConductor 接口，并直接在控件中构建所有逻辑。将其添加到 IoC 容器中，就可以关闭和运行了。你可以在自定义 UserControl 上实现 IScreen 接口，也可以将其实现为作为监控控制器基础的 POCO。ScreenCollection 可以是自定义集合，具有用于维护活动 Screen 的特殊逻辑，也可以是简单的 IList<IScreen>。</font>
 
 #### Caliburn.Micro Implementations - Caliburn.Micro实现
 These concepts are implemented in CM through various interfaces and base classes which can be used mostly to build ViewModels. Let’s take a look at them:
@@ -117,7 +117,7 @@ What this all means is that you will probably inherit most of your view models f
 So, just to re-iterate: if you need a lifecycle, inherit from Screen; otherwise inherit from PropertyChangedBase.
 
 ---
-><font color="#63aebb" face="微软雅黑">这一切意味着您可能会从 PropertyChangedBase 或 Screen 继承大部分视图模型。一般来说，如果您需要任何激活特性和 PropertyChangedBase，您都可以使用Screen。CM 的默认 Screen 实现也有一些额外的特性，使得它很容易连接到生命周期的合适部分:</font>
+><font color="#63aebb" face="微软雅黑">这一切意味着你可能会从 PropertyChangedBase 或 Screen 继承大部分视图模型。一般来说，如果你需要任何激活特性和 PropertyChangedBase，你都可以使用Screen。CM 的默认 Screen 实现也有一些额外的特性，使得它很容易连接到生命周期的合适部分:</font>
 
 > - <font color="#63aebb" face="微软雅黑">OnInitialize – 重写此方法以添加逻辑，该逻辑只应在 Screen 第一次激活时执行。初始化完成后，IsInitialized = true。</font>
 
@@ -127,7 +127,7 @@ So, just to re-iterate: if you need a lifecycle, inherit from Screen; otherwise 
 
 > - <font color="#63aebb" face="微软雅黑">CanClose – 默认的实现是允许关闭。重写此方法以添加自定义保护逻辑。</font>
 
-> - <font color="#63aebb" face="微软雅黑">OnViewLoaded – 由于 Screen 实现了 IViewAware，所以它将此作为一个条件，让您知道何时触发了视图的加载事件。如果您使用的是 SupervisingController 或 PassiveView 样式，并且需要使用该视图，请使用此选项。这也是放置视图模型逻辑的地方，它可能依赖于视图的存在，即使您可能没有直接使用视图。</font>
+> - <font color="#63aebb" face="微软雅黑">OnViewLoaded – 由于 Screen 实现了 IViewAware，所以它将此作为一个条件，让你知道何时触发了视图的加载事件。如果你使用的是 SupervisingController 或 PassiveView 样式，并且需要使用该视图，请使用此选项。这也是放置视图模型逻辑的地方，它可能依赖于视图的存在，即使你可能没有直接使用视图。</font>
 
 > - <font color="#63aebb" face="微软雅黑">TryClose – 调用此方法关闭 Screen。如果 Screen 由 Conductor 控制，它要求 Conductor 启动 Screen 的关闭过程。如 Screen 不是由 Conductor 控制的，而是独立存在的(它可能是使用 WindowManager 显示的)，这个方法尝试关闭视图。在这两种情况下，都将调用 CanClose ，如果允许，将调用 OnDeactivate = true。</font>
 
@@ -174,7 +174,7 @@ You may have noticed that CM’s IConductor interface uses the term “item” r
 Out of the box CM has three implementations of IConductor, two that work with a “screen collection” and one that does not. We’ll look at the conductor without the collection first. 
 
 ---
-><font color="#63aebb" face="微软雅黑">您可能已经注意到 CM 的 IConductor 接口使用了术语  “item”而不是 “screen”，并且我将术语 “screen collection” 放在引号中。原因是 CM 的 conductor 实现不需要执行某个项来实现 IScreen 或任何特定的接口。已引导的项目可以是 POCOs。不是强制使用 IScreen，每个 conductor 实现都是通用的，对类型没有约束。当 conductor 被要求激活/停用/关闭/等的每个项时，它会分别检查它们，以确定下面的细粒度接口: IActivate、IDeactive、IGuardClose 和 IChild。在实践中，我通常从 Screen 上继承已执行的项，但这使您能够灵活地使用自己的基类，或者仅为每个类所关心的生命周期事件实现接口。您甚至可以让一个 conductor 跟踪异类项，其中一些项继承自 Screen ，而另一些则实现了特定的接口或根本没有接口。</font>
+><font color="#63aebb" face="微软雅黑">你可能已经注意到 CM 的 IConductor 接口使用了术语  “item”而不是 “screen”，并且我将术语 “screen collection” 放在引号中。原因是 CM 的 conductor 实现不需要执行某个项来实现 IScreen 或任何特定的接口。已引导的项目可以是 POCOs。不是强制使用 IScreen，每个 conductor 实现都是通用的，对类型没有约束。当 conductor 被要求激活/停用/关闭/等的每个项时，它会分别检查它们，以确定下面的细粒度接口: IActivate、IDeactive、IGuardClose 和 IChild。在实践中，我通常从 Screen 上继承已执行的项，但这使你能够灵活地使用自己的基类，或者仅为每个类所关心的生命周期事件实现接口。你甚至可以让一个 conductor 跟踪异类项，其中一些项继承自 Screen ，而另一些则实现了特定的接口或根本没有接口。</font>
 
 ><font color="#63aebb" face="微软雅黑">开箱即用的 CM 有三种 IConductor 的实现，两种使用 “screen collection”，另一种不使用。我们先来看看没有 collection 的 conductor。</font>
 
@@ -183,7 +183,7 @@ Out of the box CM has three implementations of IConductor, two that work with a 
 This simple conductor implements the majority of IConductor’s members through explicit interface mechanisms and adds strongly typed versions of the same methods which are available publicly. This allows working with conductors generically through the interface as well as in a strongly typed fashion based on the items they are conducting. The Conductor<T> treats deactivation and closing synonymously. Since the Conductor<T> does not maintain a “screen collection,” the activation of each new item causes both the deactivation and close of the previously active item. The actual logic for determining whether or not the conducted item can close can be complex due to the async nature of IGuardClose and the fact that the conducted item may or may not implement this interface. Therefore, the conductor delegates this to an ICloseStrategy<T> which handles this and tells the conductor the results of the inquiry. Most of the time you’ll be fine with the DefaultCloseStrategy<T> that is provided automatically, but should you need to change things (perhaps IGuardClose is not sufficient for your purposes) you can set the CloseStrategy property on Conductor<T> to your own custom strategy.
 
 ---
-><font color="#63aebb" face="微软雅黑">这个简单的 conductor 通过显式接口机制实现了 IConductor 的大多数成员，并添加了相同方法的强类型版本，这些方法可以公开使用。允许通过接口以通用的方式与 conductor 一起工作，以及基于正在 conductor 的项强类型的方式。Conductor\<T> 处理停用和关闭。由于 Conductor\<T> 不维护 “Screen Collection”，每个新项激活都会导致之前的活动项停用和关闭。IGuardClose的异步特性以及所执行的项可能实现或不实现此接口，因此决定所执行项是否可以关闭的实际逻辑可能很复杂。因此，Conductor 将这个委托给 ICloseStrategy<T>，它处理并告诉 Conductor 询问的结果。大多数情况下，默认的 DefaultCloseStrategy\<T> 是自动提供的，但是如果您需要修改(也许 IGuardClose 对您的目的来说还不够)，您可以将 Conductor<T> 上的 CloseStrategy 属性设置为您自己的定制策略。</font>
+><font color="#63aebb" face="微软雅黑">这个简单的 conductor 通过显式接口机制实现了 IConductor 的大多数成员，并添加了相同方法的强类型版本，这些方法可以公开使用。允许通过接口以通用的方式与 conductor 一起工作，以及基于正在 conductor 的项强类型的方式。Conductor\<T> 处理停用和关闭。由于 Conductor\<T> 不维护 “Screen Collection”，每个新项激活都会导致之前的活动项停用和关闭。IGuardClose的异步特性以及所执行的项可能实现或不实现此接口，因此决定所执行项是否可以关闭的实际逻辑可能很复杂。因此，Conductor 将这个委托给 ICloseStrategy<T>，它处理并告诉 Conductor 询问的结果。大多数情况下，默认的 DefaultCloseStrategy\<T> 是自动提供的，但是如果你需要修改(也许 IGuardClose 对你的目的来说还不够)，你可以将 Conductor<T> 上的 CloseStrategy 属性设置为你自己的定制策略。</font>
 
 ##### Conductor<T>.Collection.OneActive
 
@@ -202,21 +202,21 @@ There are two very important details about CMs IConductor implementations that I
 ><font color="#63aebb" face="微软雅黑">同样，这个实现还具有 Conductor<T> 的特性，并添加了 “screen collection” 的概念。主要的不同之处在于，不是单个 Item 在同一时间处于激活状态，而是多个 Item 同时处于活动状态。关闭项将使其停用并从集合中删除。</font>
 
 ---
-><font color="#63aebb" face="微软雅黑">关于 CMs IConductor实现有两个非常重要的细节我还没有提到。首先，它们都是从 Screen 继承的。这是这些实现的一个关键特性，因为它在 screens 和 conductors 之间创建了一个复合模式。假设您正在构建一个基本的导航风格的应用程序。您的 shell 将是 Conductor<IScreen> 的实例，因为它每次只显示一个 Screen，不维护集合。假设其中一个屏幕非常复杂，需要一个多选项卡接口，每个选项卡都需要生命周期事件。这个特定的屏幕可以从 Conductor<T>.Collection.OneActive 继承。shell不必关心单个 Screen 的复杂性。如果需要的话，其中一个 Screen 甚至可以是实现IScreen的用户控件，而不是ViewModel。第二个重要的细节是第一个的结果。因为 IConductor 的所有 OOTB 实现都是从 Screen 上继承的，这意味着它们也有一个生命周期，生命周期级联到它们正在执行的任何项目。所以，如果一个 conductor 处于停用状态，它的 ActiveItem 也会停用。如果你试图关闭一个 conductor，它只能在它运行的的所有 Item 都可以关闭的情况下关闭。这是一个非常强大的特性。关于这一点，我经常注意到开发人员会犯一个错误。 </font> <font color="#0881a3" face="微软雅黑"> __如果您激活 conductor 中未激活的 Item，则该 Item 在 conductor 被激活之前不会被激活。__ </font> <font color="#63aebb" face="微软雅黑">当你思考这个问题时，这是有道理的，但偶尔也会让你抓头。</font>
+><font color="#63aebb" face="微软雅黑">关于 CMs IConductor实现有两个非常重要的细节我还没有提到。首先，它们都是从 Screen 继承的。这是这些实现的一个关键特性，因为它在 screens 和 conductors 之间创建了一个复合模式。假设你正在构建一个基本的导航风格的应用程序。你的 shell 将是 Conductor<IScreen> 的实例，因为它每次只显示一个 Screen，不维护集合。假设其中一个屏幕非常复杂，需要一个多选项卡接口，每个选项卡都需要生命周期事件。这个特定的屏幕可以从 Conductor<T>.Collection.OneActive 继承。shell不必关心单个 Screen 的复杂性。如果需要的话，其中一个 Screen 甚至可以是实现IScreen的用户控件，而不是ViewModel。第二个重要的细节是第一个的结果。因为 IConductor 的所有 OOTB 实现都是从 Screen 上继承的，这意味着它们也有一个生命周期，生命周期级联到它们正在执行的任何项目。所以，如果一个 conductor 处于停用状态，它的 ActiveItem 也会停用。如果你试图关闭一个 conductor，它只能在它运行的的所有 Item 都可以关闭的情况下关闭。这是一个非常强大的特性。关于这一点，我经常注意到开发人员会犯一个错误。 </font> <font color="#0881a3" face="微软雅黑"> __如果你激活 conductor 中未激活的 Item，则该 Item 在 conductor 被激活之前不会被激活。__ </font> <font color="#63aebb" face="微软雅黑">当你思考这个问题时，这是有道理的，但偶尔也会让你抓头。</font>
 
 ##### Quasi-Conductors
 
 Not everything in CM that can be a screen is rooted inside of a Conductor. For example, what about the your root view model? If it’s a conductor, who is activating it? Well, that’s one of the jobs that the Bootstrapper performs. The Bootstrapper itself is not a conductor, but it understands the fine-grained lifecycle interfaces discussed above and ensures that your root view model is treated with the respect it deserves. The WindowManager works in a similar way by acting a little like a conductor for the purpose of enforcing the lifecycle of your modal (and modeless - WPF only) windows. So, lifecycle isn’t magical. All your screens/conductors must be either rooted in a conductor or managed by the Bootstrapper or WindowManager to work properly; otherwise you are going to need to manage the lifecycle yourself.
 
 ---
-><font color="#63aebb" face="微软雅黑">并非 CM 中可以作为 screen 的所有内容都置于 conductor 内部。例如，根视图模型?如果是 conductor ，谁在激活它?这是 Bootstrapper 执行的任务之一。Bootstrapper 本身不是一个 conductor ，但它理解上面讨论的细粒度生命周期接口，并确保根视图模型得到遵守。WindowManager 的工作方式与此类似，它的工作方式有点像一个 conductor 以强制执行模态（和无模式 - 仅WPF）窗口的生命周期。所以，生命周期并不神奇。您的所有 screens/conductors 必须置于 conductor 中或由 Bootstrapper 或 WindowManager 管理才能正常工作; 否则你将需要自己管理生命周期。</font>
+><font color="#63aebb" face="微软雅黑">并非 CM 中可以作为 screen 的所有内容都置于 conductor 内部。例如，根视图模型?如果是 conductor ，谁在激活它?这是 Bootstrapper 执行的任务之一。Bootstrapper 本身不是一个 conductor ，但它理解上面讨论的细粒度生命周期接口，并确保根视图模型得到遵守。WindowManager 的工作方式与此类似，它的工作方式有点像一个 conductor 以强制执行模态（和无模式 - 仅WPF）窗口的生命周期。所以，生命周期并不神奇。你的所有 screens/conductors 必须置于 conductor 中或由 Bootstrapper 或 WindowManager 管理才能正常工作; 否则你将需要自己管理生命周期。</font>
 
 ##### View-First
 
 If you are working with WP7 or using the Silverlight Navigation Framework, you may be wondering if/how you can leverage screens and conductors. So far, I’ve been assuming a primarily ViewModel-First approach to shell engineering. But the WP7 platform enforces a View-First approach by controlling page navigation. The same is true of the SL Nav framework. In these cases, the Phone/Nav Framework acts like a conductor. In order to make this play well with ViewModels, the WP7 version of CM has a FrameAdapter which hooks into the NavigationService. This adapter, which is set up by the PhoneBootstrapper, understands the same fine-grained lifecycle interfaces that conductors do and ensures that they are called on your ViewModels at the appropriate points during navigation. You can even cancel the phone’s page navigation by implementing IGuardClose on your ViewModel. While the FrameAdapter is only part of the WP7 version of CM, it should be easily portable to Silverlight should you wish to use it in conjunction with the Silverlight Navigation Framework.
 
 ---
-><font color="#63aebb" face="微软雅黑">如果您正在使用 WP7 或使用 Silverlight 导航框架，您可能想知道是否/如何利用 screens 和 conductors。到目前为止，我一直在假设一种主要的 ViewModel-First 方法来进行 shell 工程。但是 WP7 平台通过控制页面导航来实施 View-First 方法。SL Nav框架也是如此。在这些情况下，电话/导航框架就像一个 conductor。为了在 ViewModels 中很好地发挥作用，WP7 版本的 CM 有一个 FrameAdapter，它连接到NavigationService。这个适配器是由PhoneBootstrapper设置的，它理解导体所做的相同的细粒度生命周期接口，并确保在导航过程中在适当的点调用视图模型。你甚至可以通过在视图模型上实现 IGuardClose 来取消手机的页面导航。虽然 FrameAdapter 只是 WP7 版本 CM 的一部分，但是如果您希望将其与 Silverlight 导航框架一起使用，那么它应该可以轻松地移植到 Silverlight。</font>
+><font color="#63aebb" face="微软雅黑">如果你正在使用 WP7 或使用 Silverlight 导航框架，你可能想知道是否/如何利用 screens 和 conductors。到目前为止，我一直在假设一种主要的 ViewModel-First 方法来进行 shell 工程。但是 WP7 平台通过控制页面导航来实施 View-First 方法。SL Nav框架也是如此。在这些情况下，电话/导航框架就像一个 conductor。为了在 ViewModels 中很好地发挥作用，WP7 版本的 CM 有一个 FrameAdapter，它连接到NavigationService。这个适配器是由PhoneBootstrapper设置的，它理解导体所做的相同的细粒度生命周期接口，并确保在导航过程中在适当的点调用视图模型。你甚至可以通过在视图模型上实现 IGuardClose 来取消手机的页面导航。虽然 FrameAdapter 只是 WP7 版本 CM 的一部分，但是如果你希望将其与 Silverlight 导航框架一起使用，那么它应该可以轻松地移植到 Silverlight。</font>
 
 ### Simple Navigation - 示例导航
 
@@ -308,7 +308,7 @@ public class PageTwoViewModel : Screen {
 ```
 
 ---
-><font color="#63aebb" face="微软雅黑">我想指出一些最后的事情。注意，PageOneViewModel 只是一个 POCO，但 PageTwoViewModel 继承自 Screen。请记住，CM 中的导体不会对可以进行的操作施加任何限制。相反，他们会在必要的时间检查每个实例是否支持各种细粒度生命周期实例。因此，当为 PageTwoViewModel 调用 ActivateItem 时，它将首先检查 PageOneViewModel 以查看它是否实现了 IGuardClose，由于它没有这样做，它将试图关闭它。然后它将检查是否实现了 IDeactivate。由于它没有这样做，它将继续激活新 Item。首先，它检查新项是否实现IChild。从Screen开始，它就连接了层次关系。接下来，它将检查PageTwoViewModel以查看它是否实现了IActivate。从 Screen 开始，然后 OnActivate 方法中的代码将运行。最后，它将在 conductor 上设置 ActiveItem 属性并引发相应的事件。以下是应该记住的要点：激活是特定于 ViewModel 的生命周期过程，并不保证 View 的状态。很多时候，即使您的 ViewModel 已被激活，其视图可能还不可见。运行示例时，您将看到这一点。MessageBox 将在激活发生时显示，但第二页的视图将不可见。请记住，如果您有任何依赖于已加载视图的激活逻辑，则应覆盖 Screen.OnViewLoaded 而不是与 OnActivate 结合使用。</font>
+><font color="#63aebb" face="微软雅黑">我想指出一些最后的事情。注意，PageOneViewModel 只是一个 POCO，但 PageTwoViewModel 继承自 Screen。请记住，CM 中的导体不会对可以进行的操作施加任何限制。相反，他们会在必要的时间检查每个实例是否支持各种细粒度生命周期实例。因此，当为 PageTwoViewModel 调用 ActivateItem 时，它将首先检查 PageOneViewModel 以查看它是否实现了 IGuardClose，由于它没有这样做，它将试图关闭它。然后它将检查是否实现了 IDeactivate。由于它没有这样做，它将继续激活新 Item。首先，它检查新项是否实现IChild。从Screen开始，它就连接了层次关系。接下来，它将检查PageTwoViewModel以查看它是否实现了IActivate。从 Screen 开始，然后 OnActivate 方法中的代码将运行。最后，它将在 conductor 上设置 ActiveItem 属性并引发相应的事件。以下是应该记住的要点：激活是特定于 ViewModel 的生命周期过程，并不保证 View 的状态。很多时候，即使你的 ViewModel 已被激活，其视图可能还不可见。运行示例时，你将看到这一点。MessageBox 将在激活发生时显示，但第二页的视图将不可见。请记住，如果你有任何依赖于已加载视图的激活逻辑，则应覆盖 Screen.OnViewLoaded 而不是与 OnActivate 结合使用。</font>
 
 ### Simple MDI - MDI 示例
 
@@ -404,7 +404,7 @@ Those are the main scenarios. Hopefully you can see some of the differences from
 As you can see we are using a WPF TabControl. CM’s conventions will bind its ItemsSource to the Items collection and its SelectedItem to the ActiveItem. It will also add a default ContentTemplate which will be used to compose in the ViewModel/View pair for the ActiveItem. Conventions can also supply an ItemTemplate since our tabs all implement IHaveDisplayName (through Screen), but I’ve opted to override that by supplying my own to enable closing the tabs. We’ll talk more in depth about conventions in a later article. For completeness, here are the trivial implementations of TabViewModel along with its view:
 
 ---
-><font color="#63aebb" face="微软雅黑">如您所见，我们正在使用 WPF TabControl。CM 的约定将其 ItemsSource 绑定到 Items 集合，将其 SelectedItem 绑定到 ActiveItem。它还将添加一个默认的 ContentTemplate，用于在 ActiveItem 的 ViewModel / View对中进行组合。约定也可以提供 ItemTemplate，因为我们的选项卡都实现了 IHaveDisplayName（通过Screen），但是我选择通过提供我自己的选项来启用关闭选项卡。我们将在后面的文章中更深入地讨论约定。为了完整起见，这里有 TabViewModel 的简单实现及其视图：</font>
+><font color="#63aebb" face="微软雅黑">如你所见，我们正在使用 WPF TabControl。CM 的约定将其 ItemsSource 绑定到 Items 集合，将其 SelectedItem 绑定到 ActiveItem。它还将添加一个默认的 ContentTemplate，用于在 ActiveItem 的 ViewModel / View对中进行组合。约定也可以提供 ItemTemplate，因为我们的选项卡都实现了 IHaveDisplayName（通过Screen），但是我选择通过提供我自己的选项来启用关闭选项卡。我们将在后面的文章中更深入地讨论约定。为了完整起见，这里有 TabViewModel 的简单实现及其视图：</font>
 
 ``` csharp
 namespace Caliburn.Micro.SimpleMDI {
@@ -434,11 +434,11 @@ I’ve tried to keep it simple so far, but that’s not the case for our next sa
 ---
 ><font color="#63aebb" face="微软雅黑">到目前为止，我一直试图让它保持简单，但这不是我们下一个示例的情况。在准备过程中，你可能想至少要仔细考虑一下，或者试着去做这些事情:</font>
 
-> - <font color="#63aebb" face="微软雅黑">摆脱通用的 TabViewModel。你真的不会在真正的应用程序中做这样的事情。创建几个自定义视图模型和视图。连接起来，以便您可以在导体中打开不同的视图模型。激活每个视图模型时，确认您在选项卡控件中看到了正确的视图。</font>
+> - <font color="#63aebb" face="微软雅黑">摆脱通用的 TabViewModel。你真的不会在真正的应用程序中做这样的事情。创建几个自定义视图模型和视图。连接起来，以便你可以在导体中打开不同的视图模型。激活每个视图模型时，确认你在选项卡控件中看到了正确的视图。</font>
 
-> - <font color="#63aebb" face="微软雅黑">在 Silverlight 中重建此示例。不幸的是，Silverlight 的 TabControl 完全被破坏，无法充分利用数据绑定。相反，尝试使用水平 ListBox 作为选项卡，使用 ContentControl 作为选项卡内容。将它们放在 DockPanel 中并使用一些命名约定，您将获得与 TabControl 相同的效果。</font>
+> - <font color="#63aebb" face="微软雅黑">在 Silverlight 中重建此示例。不幸的是，Silverlight 的 TabControl 完全被破坏，无法充分利用数据绑定。相反，尝试使用水平 ListBox 作为选项卡，使用 ContentControl 作为选项卡内容。将它们放在 DockPanel 中并使用一些命名约定，你将获得与 TabControl 相同的效果。</font>
 
-> - <font color="#63aebb" face="微软雅黑">创建工具栏视图模型。添加一个 IoC 容器并将 ToolBarViewModel 注册为单例。将它添加到 ShellViewModel 中，并确保它在 ShellView 中呈现(记住，您可以为此使用 ContentControl 命名它)。接下来，将 ToolBarViewModel 注入每个 TabViewModel。在 TabViewModel OnActivate 和 OnDeactivate 中编写代码，以在激活特定 TabViewModel 时从工具栏添加/删除上下文项。好处：为此创建一个 DSL，它不需要 OnDeactivate 覆盖中的显式代码。提示：使用事件。</font>
+> - <font color="#63aebb" face="微软雅黑">创建工具栏视图模型。添加一个 IoC 容器并将 ToolBarViewModel 注册为单例。将它添加到 ShellViewModel 中，并确保它在 ShellView 中呈现(记住，你可以为此使用 ContentControl 命名它)。接下来，将 ToolBarViewModel 注入每个 TabViewModel。在 TabViewModel OnActivate 和 OnDeactivate 中编写代码，以在激活特定 TabViewModel 时从工具栏添加/删除上下文项。好处：为此创建一个 DSL，它不需要 OnDeactivate 覆盖中的显式代码。提示：使用事件。</font>
 
 > - <font color="#63aebb" face="微软雅黑">将 SimpleMDI 示例和 SimpleNavigation 示例组合在一起。在导航示例中将 MDI Shell 添加为 PageViewModel，或者将导航 Shell添加为 MDI示例中的选项卡。</font>
 
@@ -454,7 +454,7 @@ Ok, now that you’ve seen what it does, let’s look at how it’s put together
 
 I’m not going to go line-by-line through this sample. It’s better if you take the time to look through it and figure out how things work yourself. But, I do want to point out a few interesting implementation details.
 
-> - <font color="#63aebb" face="微软雅黑">好了，现在您已经了解了它的作用，让我们看看它是如何组合起来的。正如您从屏幕截图中看到的，我选择了通过特性来组织项目:客户、订单、设置等等。在大多数项目中，我更喜欢这样做，而不是通过“技术”分组来组织，比如 Views 和 ViewModels。如果我有一个复杂的功能，那么我可能会把它分解成这些区域。</font>
+> - <font color="#63aebb" face="微软雅黑">好了，现在你已经了解了它的作用，让我们看看它是如何组合起来的。正如你从屏幕截图中看到的，我选择了通过特性来组织项目:客户、订单、设置等等。在大多数项目中，我更喜欢这样做，而不是通过“技术”分组来组织，比如 Views 和 ViewModels。如果我有一个复杂的功能，那么我可能会把它分解成这些区域。</font>
 
 > - <font color="#63aebb" face="微软雅黑">我不会逐行分析这个示例。如果你花点时间去看一看，弄清楚是如何进行的，那就更好了。我想指出一些有趣的实现细节。</font>
 
@@ -462,7 +462,7 @@ I’m not going to go line-by-line through this sample. It’s better if you tak
 
 One of the most important features of Screens and Conductors in Caliburn.Micro is that they are an implementation of the Composite Pattern, making them easy to compose together in different configurations. Generally speaking, composition is one of the most important aspects of object oriented programming and learning how to use it in your presentation tier can yield great benefits. To see how composition plays a role in this particular sample, let's look at two screenshots. The first shows the application with the CustomersWorkspace in view, editing a specific Customer’s Address. The second screen is the same, but with its View/ViewModel pairs rotated three-dimensionally, so you can see how the UI is composed.
 
-> - <font color="#63aebb" face="微软雅黑">Caliburn.Micro 中 Screens 和 Conductors 最重要的特性之一是它们是复合模式的实现，使得它们在不同的配置下很容易组合在一起。一般来说，组合是面向对象编程中最重要的方面之一，学习如何在表示层中使用它会带来很大的好处。了解合成在这个示例中是如何发挥作用的，让我们来看两个截图。第一个视图显示了带有 CustomersWorkspace 的应用程序，它编辑客户的地址。第二个屏幕是相同的，但是它的 View  /ViewModel 对是三维旋转的，所以您可以看到UI是如何组成的。</font>
+> - <font color="#63aebb" face="微软雅黑">Caliburn.Micro 中 Screens 和 Conductors 最重要的特性之一是它们是复合模式的实现，使得它们在不同的配置下很容易组合在一起。一般来说，组合是面向对象编程中最重要的方面之一，学习如何在表示层中使用它会带来很大的好处。了解合成在这个示例中是如何发挥作用的，让我们来看两个截图。第一个视图显示了带有 CustomersWorkspace 的应用程序，它编辑客户的地址。第二个屏幕是相同的，但是它的 View  /ViewModel 对是三维旋转的，所以你可以看到UI是如何组成的。</font>
 
 *Editing a Customer’s Address*
 
@@ -480,7 +480,7 @@ In this application, the ShellViewModel is a Conductor<IWorkspace>.Collection.On
 
 You may not be aware of this, but Caliburn.Micro can display multiple Views over the same ViewModel. This is supported by setting the View.Context attached property on the View/ViewModel’s injection site. Here’s an example from the default CustomerWorkspaceView:
 
-> - <font color="#63aebb" face="微软雅黑">您可能没有注意到，Caliburn.Micro 可以在同一个 ViewModel 上显示多个视图。通过在 View / ViewModel 的注入站点上设置 View.Context 附加属性来支持此功能。以下是默认 CustomerWorkspaceView 的示例：</font>
+> - <font color="#63aebb" face="微软雅黑">你可能没有注意到，Caliburn.Micro 可以在同一个 ViewModel 上显示多个视图。通过在 View / ViewModel 的注入站点上设置 View.Context 附加属性来支持此功能。以下是默认 CustomerWorkspaceView 的示例：</font>
 
 ``` xml
 <clt:TransitioningContentControl cal:View.Context="{Binding State, Mode=TwoWay}"
@@ -490,7 +490,7 @@ You may not be aware of this, but Caliburn.Micro can display multiple Views over
 
 There is a lot of other Xaml surrounding this to form the chrome of the CustomerWorkspaceView, but the content region is the most noteworthy part of the view. Notice that we are binding the View.Context attached property to the State property on the CustomerWorkspaceViewModel. This allows us to dynamically change out views based on the value of that property. Because this is all hosted in the TransitioningContentControl, we get a nice transition whenever the view changes. This technique is used to switch the CustomerWorkspaceViewModel from a “Master” view, where it displays all open CustomerViewModels, a search UI and a New button, to a “Detail” view, where it displays the currently activated CustomerViewModel along with its specific view (composed in). In order for CM to find these contextual views, you need a namespace based on the ViewModel name, minus the words “View” and “Model”, with some Views named corresponding to the Context. For example, when the framework looks for the Detail view of Caliburn.Micro.HelloScreens.Customers.CustomersWorkspaceViewModel, it’s going to look for Caliburn.Micro.HelloScreens.Customers.CustomersWorkspace.Detail That’s the out-of-the-box naming convention. If that doesn’t work for you, you can simply customize the ViewLocator.LocateForModelType func.
 
-> - <font color="#63aebb" face="微软雅黑">围绕它的很多其他Xaml构成了 CustomerWorkspaceView 的 chrome，但内容区域是视图中最值得注意的部分。请注意，我们将 View.Context 附加属性绑定到 CustomerWorkspaceViewModel 上的 State 属性。这允许我们根据该属性的值动态更改视图。因为这都是在 TransitioningContentControl 中托管的，所以只要视图发生变化，我们就会得到一个很好的转换。此技术用于将 CustomerWorkspaceViewModel 从“主”视图切换到“详细信息”视图，其中显示所有打开的 CustomerViewModel，搜索 UI 和 “新建” 按钮，其中显示当前激活的 CustomerViewModel 及其特定视图（组成）。为了让 CM 找到这些上下文视图，您需要一个基于 ViewModel 名称的命名空间，减去单词 “View” 和 “Model”，其中一些 Views 对应于 Context。例如，当框架查找 Caliburn.Micro.HelloScreens.Customers.CustomersWorkspaceViewModel 的详细信息视图时，它将查找 Caliburn.Micro.HelloScreens.Customers.CustomersWorkspace.Detail 这是开箱即用的命名约定。如果这对您不起作用，您只需自定义 ViewLocator.LocateForModelType func即可。</font>
+> - <font color="#63aebb" face="微软雅黑">围绕它的很多其他Xaml构成了 CustomerWorkspaceView 的 chrome，但内容区域是视图中最值得注意的部分。请注意，我们将 View.Context 附加属性绑定到 CustomerWorkspaceViewModel 上的 State 属性。这允许我们根据该属性的值动态更改视图。因为这都是在 TransitioningContentControl 中托管的，所以只要视图发生变化，我们就会得到一个很好的转换。此技术用于将 CustomerWorkspaceViewModel 从“主”视图切换到“详细信息”视图，其中显示所有打开的 CustomerViewModel，搜索 UI 和 “新建” 按钮，其中显示当前激活的 CustomerViewModel 及其特定视图（组成）。为了让 CM 找到这些上下文视图，你需要一个基于 ViewModel 名称的命名空间，减去单词 “View” 和 “Model”，其中一些 Views 对应于 Context。例如，当框架查找 Caliburn.Micro.HelloScreens.Customers.CustomersWorkspaceViewModel 的详细信息视图时，它将查找 Caliburn.Micro.HelloScreens.Customers.CustomersWorkspace.Detail 这是开箱即用的命名约定。如果这对你不起作用，你只需自定义 ViewLocator.LocateForModelType func即可。</font>
 
 ##### Custom IConductor Implementation - 自定义IConductor实现
 
@@ -707,6 +707,6 @@ The CustomerViewModel and OrderViewModel use this mechanism to display a modal d
 </font>
 
 ---
-> <font color="#63aebb" face="微软雅黑">如果存在脏数据，CustomerViewModel和OrderViewModel使用此机制显示模式对话框。但是，您也可以将此用于任何数量的异步任务。例如，假设您有一些长时间运行的进程，希望阻止应用程序的关闭。这也可以很好地工作。</font>
+> <font color="#63aebb" face="微软雅黑">如果存在脏数据，CustomerViewModel和OrderViewModel使用此机制显示模式对话框。但是，你也可以将此用于任何数量的异步任务。例如，假设你有一些长时间运行的进程，希望阻止应用程序的关闭。这也可以很好地工作。</font>
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[All About Conventions - 约定](./conventions)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[All About Conventions - 约定](./conventions.md)

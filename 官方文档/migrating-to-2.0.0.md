@@ -32,5 +32,5 @@ This document will try to outline all the changes you may see updating a project
 
  - `PhoneBootstrapper` is now called `PhoneBootstrapperBase`.
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Basic Configuration - 基本配置](./configuration)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Basic Configuration - 基本配置](./configuration.md)
 

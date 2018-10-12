@@ -29,7 +29,7 @@ public static class IoC {
 As you can see above much of the functionality of IoC is dependant on the consumer providing it. In most cases the relevant methods required map directly to methods provided by all Dependency Injection containers (although the name and functionality may differ).
 
 ---
-><font color="#63aebb" face="微软雅黑">如您所见，IoC的许多功能取决于提供它的消费者。在大多数情况下，所需的相关方法直接映射到所有依赖注入容器提供的方法（尽管名称和功能可能不同）。</font>
+><font color="#63aebb" face="微软雅黑">如你所见，IoC的许多功能取决于提供它的消费者。在大多数情况下，所需的相关方法直接映射到所有依赖注入容器提供的方法（尽管名称和功能可能不同）。</font>
 
 ### Injecting IoC with functionality - 向 IoC 注入功能
 
@@ -63,18 +63,18 @@ public class CustomBootstrapper : Bootstrapper {
 By mapping your chosen dependency container to IoC, Calburn.Micro can take advantage of any service bindings made on the container via Service Location. 
 
 ---
-><font color="#63aebb" face="微软雅黑">通过将您选择的依赖容器映射到IoC，Calburn.Micro可以利用通过服务位置对容器进行的任何服务绑定。</font>
+><font color="#63aebb" face="微软雅黑">通过将你选择的依赖容器映射到IoC，Calburn.Micro可以利用通过服务位置对容器进行的任何服务绑定。</font>
 
-### Using IoC in your application - 在您的应用程序中使用 IoC
+### Using IoC in your application - 在你的应用程序中使用 IoC
 
 As stated at the outset Service Location, apart from a few specific areas, is considered by many to be an anti pattern; in most cases you will want to make use of your dependency injection container. Many problems that Service Locator solves can be fixed without it by planning out your applications composition; refer to Screens, Conductors & Composition for more information on composition.
 
 However, if you still require Service Location, IoC makes it easy. The code below shows how to use the service locator to retrieve or inject instances with services.
 
 ---
-><font color="#63aebb" face="微软雅黑">如开头服务地点所述，除了一些特定的领域，许多人认为这是一种反模式; 在大多数情况下，您将需要使用依赖注入容器。通过规划应用程序组合，可以在没有它的情况下修复 Service Locator 解决的许多问题; 有关成分的更多信息，请参阅Screens, Conductors 和 Composition。
+><font color="#63aebb" face="微软雅黑">如开头服务地点所述，除了一些特定的领域，许多人认为这是一种反模式; 在大多数情况下，你将需要使用依赖注入容器。通过规划应用程序组合，可以在没有它的情况下修复 Service Locator 解决的许多问题; 有关成分的更多信息，请参阅Screens, Conductors 和 Composition。
 
->如果您仍需要服务定位，IoC 可以轻松实现。下面的代码显示了如何使用服务定位器来检索或注入带有服务的实例。</font>
+>如果你仍需要服务定位，IoC 可以轻松实现。下面的代码显示了如何使用服务定位器来检索或注入带有服务的实例。</font>
 
 ##### Getting a single service - 获得单一服务
 
@@ -112,4 +112,4 @@ var viewModel = new LocallyCreatedViewModel();
 IoC.BuildUp(viewModel);
 ```
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[The Window Manager - 窗口管理器](./window-manager)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[The Window Manager - 窗口管理器](./window-manager.md)

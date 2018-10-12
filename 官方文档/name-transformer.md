@@ -12,9 +12,9 @@ Custom rules are added by calling the AddRule() method of the NameTransformer ob
 The calling convention is as follows:
 
 ---
-><font color="#63aebb" face="微软雅黑">NameTransformer 是在 Caliburn.Micro v1.1中引入，是 ViewLocator 和 ViewModelLocator 将类名称映射到其伴随角色的不可或缺的一部分。虽然您可以覆盖这些服务上的各种 func 来替换基础行为，但只需使用描述您的唯一映射策略的相应 NameTransformer 配置规则即可满足您的大多数需求。
+><font color="#63aebb" face="微软雅黑">NameTransformer 是在 Caliburn.Micro v1.1中引入，是 ViewLocator 和 ViewModelLocator 将类名称映射到其伴随角色的不可或缺的一部分。虽然你可以覆盖这些服务上的各种 func 来替换基础行为，但只需使用描述你的唯一映射策略的相应 NameTransformer 配置规则即可满足你的大多数需求。
 
->名称转换基于使用正则表达式模式匹配的规则。执行转换时，将按顺序评估所有已注册的规则。默认情况下，NameTransformer 返回由所有匹配规则生成的结果名称。ViewLocator 和 ViewModelLocator 类将使用结果名称列表按顺序检查 AssemblySource.Instance 集合中是否存在匹配类型。找到类型后，将忽略列表中的其余名称。虽然无论 NameTransformer 返回的名称数量如何，locator 类总是最多返回一种类型，但重要的是能够指定 NameTransformer 如何构造该名称列表以更好地控制将定位的类型。控制的主要手段是顺序。因为 locator 类需要支持一些开箱即用的类型命名约定，所以会自动添加一些缺省名称转换规则。但为了能够支持自定义规则并允许它们优先于默认规则，NameTransformer以相反的顺序计算添加规则(LIFO)。通常，您需要在更具体的规则之后评估更通用的规则。因此，在向 NameTransfomer 添加规则时，必须先添加更通用的规则，然后再添加更具体的规则。为了将 NameTransformer 返回的名称限制为第一个匹配规则生成的名称，可以将 NameTransformer 的 UseEagerRuleSelection 属性设置为false，默认为true。
+>名称转换基于使用正则表达式模式匹配的规则。执行转换时，将按顺序评估所有已注册的规则。默认情况下，NameTransformer 返回由所有匹配规则生成的结果名称。ViewLocator 和 ViewModelLocator 类将使用结果名称列表按顺序检查 AssemblySource.Instance 集合中是否存在匹配类型。找到类型后，将忽略列表中的其余名称。虽然无论 NameTransformer 返回的名称数量如何，locator 类总是最多返回一种类型，但重要的是能够指定 NameTransformer 如何构造该名称列表以更好地控制将定位的类型。控制的主要手段是顺序。因为 locator 类需要支持一些开箱即用的类型命名约定，所以会自动添加一些缺省名称转换规则。但为了能够支持自定义规则并允许它们优先于默认规则，NameTransformer以相反的顺序计算添加规则(LIFO)。通常，你需要在更具体的规则之后评估更通用的规则。因此，在向 NameTransfomer 添加规则时，必须先添加更通用的规则，然后再添加更具体的规则。为了将 NameTransformer 返回的名称限制为第一个匹配规则生成的名称，可以将 NameTransformer 的 UseEagerRuleSelection 属性设置为false，默认为true。
 
 >通过调用由 ViewLocator 和 ViewModelLocator 类维护的 NameTransformer 对象的AddRule() 方法来添加自定义规则。这两个类都引用了自己独立的 NameTransformer 静态实例，因此每个类都维护着自己的一组规则。
 
@@ -165,8 +165,8 @@ The capture group "suffix" in the example above does a pattern match on names th
 
 >你不会像上面的例子那样构造一个替换值，因为它会产生一个非法的类型名称。它只是一个替换值，它将返回所有捕获组以用于演示目的。
 
->您可能会注意到，捕获组并不相互排斥。捕获组可以嵌套在示例中，例如 “nsfull” 捕获一个完整的命名空间，而 “nsroot”、“nsstem” 和 “nsleaf” 捕获该命名空间的各个组件。如果您需要“交换”任何单个组件，您将使用单个组件。
+>你可能会注意到，捕获组并不相互排斥。捕获组可以嵌套在示例中，例如 “nsfull” 捕获一个完整的命名空间，而 “nsroot”、“nsstem” 和 “nsleaf” 捕获该命名空间的各个组件。如果你需要“交换”任何单个组件，你将使用单个组件。
 
 >上面示例中的捕获组“后缀”对以 “ViewModels” 结尾的名称执行模式匹配。这个捕获组的主要目的不是让它可以用作转换的一部分，因为 ViewLocator 的目的是解析视图名称。这个捕获组的主要原因是防止子字符串 “ViewModels” 在 “basename” 组中被捕获，大多数情况下，这是字符串转换的一部分。</font>
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[The Event Aggregator - 事件聚合器](./event-aggregator)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[The Event Aggregator - 事件聚合器](./event-aggregator.md)

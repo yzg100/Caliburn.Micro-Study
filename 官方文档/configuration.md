@@ -6,7 +6,7 @@ title: Basic Configuration, Actions and Conventions
 Open Visual Studio and create a new Silverlight 4 Application called “Caliburn.Micro.Hello”. You don’t need a web site or test project. Add a reference to System.Windows.Interactivity.dll and Caliburn.Micro.dll. You can find them both in the \src\Caliburn.Micro.Silverlight\Bin\Release (or Debug) folder. Delete “MainPage.xaml” and clean up your “App.xaml.cs” so that it looks like this:
 
 ---
-><font color="#63aebb" face="微软雅黑">打开Visual Studio，创建一个名为 “Caliburn.Micro.Hello” 的 Silverlight 4 新应用程序。您不需要 web 站点或测试项目。添加对 System.Windows.Interactivity.dll 的引用 和 Caliburn.Micro.dll。你可以在\src\Caliburn.Micro中找到它们。Silverlight\Bin\Release(或Debug)文件夹。删除 "MainPage.xaml",然后清理你的"App.xaml.cs" 它看起来是这样的:</font>
+><font color="#63aebb" face="微软雅黑">打开Visual Studio，创建一个名为 “Caliburn.Micro.Hello” 的 Silverlight 4 新应用程序。你不需要 web 站点或测试项目。添加对 System.Windows.Interactivity.dll 的引用 和 Caliburn.Micro.dll。你可以在\src\Caliburn.Micro中找到它们。Silverlight\Bin\Release(或Debug)文件夹。删除 "MainPage.xaml",然后清理你的"App.xaml.cs" 它看起来是这样的:</font>
  
 ``` csharp
 namespace Caliburn.Micro.Hello {
@@ -58,7 +58,7 @@ Now that we have our VM, let’s create the bootstrapper that will configure the
 
 ---
 ><font color="#63aebb" face="微软雅黑">注意，ShellViewModel 继承自 PropertyChangedBase ，这个基类实现了属性更改通知的基础，并自动执行UI线程编组。
-现在我们有了 VM，让我们创建一个引导程序来配置框架并告诉它要做什么。创建一个名为 HelloBootstrapper 的新类。您可以使用这一小段代码:</font>
+现在我们有了 VM，让我们创建一个引导程序来配置框架并告诉它要做什么。创建一个名为 HelloBootstrapper 的新类。你可以使用这一小段代码:</font>
 
 ``` csharp
 namespace Caliburn.Micro.Hello {
@@ -77,7 +77,7 @@ namespace Caliburn.Micro.Hello {
 The Bootsrapper allows you to specify the type of “root view model” via the generic method. The “root view model” is a VM that Caliburn.Micro will instantiate and use to show your application. Next, we need to place the HelloBootstrapper somewhere where it will be run at startup. To do that, change your App.xaml to match this:
 
 ---
-><font color="#63aebb" face="微软雅黑">Bootsrapper 允许您通过通用方法指定 “根视图模型”的类型。“根视图模型” 是 Caliburn.Micro 将实例化并用于显示您的应用程序的VM。。接下来，我们需要将 HelloBootstrapper 放在启动时运行它的地方。要做到这一点，请更改 App.xaml 以匹配以下内容:</font>
+><font color="#63aebb" face="微软雅黑">Bootsrapper 允许你通过通用方法指定 “根视图模型”的类型。“根视图模型” 是 Caliburn.Micro 将实例化并用于显示你的应用程序的VM。接下来，我们需要将 HelloBootstrapper 放在启动时运行它的地方。要做到这一点，请更改 App.xaml 以匹配以下内容:</font>
 
 #### Silverlight / Windows Phone
 ``` xml
@@ -144,6 +144,6 @@ Caliburn.Micro creates the ShellViewModel, but doesn’t know how to render it. 
 Caliburn.Micro uses a simple naming convention to locate Views for ViewModels. Essentially, it takes the FullName and removes “Model” from it. So, given MyApp.ViewModels.MyViewModel, it would look for MyApp.Views.MyView. Looking at the View and ViewModel side-by-side, you can see that the TextBox with x:Name=”Name” is bound to the “Name” property on the VM. You can also see that the Button with x:Name=”SayHello” is bound to the method with the same name on the VM. The “CanSayHello” property is guarding access to the “SayHello” action by disabling the Button. These are the basics of Caliburn.Micro’s ActionMessage and Conventions functionality. There’s much more to show. But, next time I want to show how we can integrate an IoC container such as MEF.
 
 ---
-><font color="#63aebb" face="微软雅黑">Caliburn.Micro 使用简单的命名约定来查找 ViewModel 的 Views。它获取全名并从其中删除“Model”。所以 MyApp.ViewModels.MyViewModel ，它会查找 MyApp.Views.MyView 。查看 View 和 ViewModel，您可以看到带有 x:Name="Name" 的文本框绑定到VM上的 "Name"属性。您还可以看到，带有 x:Name="SayHello" 的按钮绑定到 VM 上同名的方法。“CanSayHello” 属性通过禁用按钮来保护对 “SayHello” 操作的访问。这是 Caliburn.Micro ActionMessage 和 Conventions 功能的基础。还有很多东西要展示，下次我想展示如何集成一个 IoC 容器，比如 MEF。</font>
+><font color="#63aebb" face="微软雅黑">Caliburn.Micro 使用简单的命名约定来查找 ViewModel 的 Views。它获取全名并从其中删除“Model”。所以 MyApp.ViewModels.MyViewModel ，它会查找 MyApp.Views.MyView 。查看 View 和 ViewModel，你可以看到带有 x:Name="Name" 的文本框绑定到VM上的 "Name"属性。你还可以看到，带有 x:Name="SayHello" 的按钮绑定到 VM 上同名的方法。“CanSayHello” 属性通过禁用按钮来保护对 “SayHello” 操作的访问。这是 Caliburn.Micro ActionMessage 和 Conventions 功能的基础。还有很多东西要展示，下次我想展示如何集成一个 IoC 容器，比如 MEF。</font>
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Customizing the Bootstrapper - 自定义启动加载器](./bootstrapper)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Customizing the Bootstrapper - 自定义启动加载器](./bootstrapper.md)

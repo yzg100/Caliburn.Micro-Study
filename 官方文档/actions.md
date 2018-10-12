@@ -3,10 +3,10 @@ layout: page
 title: All About Actions
 ---
 
-We briefly introduced actions in [Pt. 1](./configuration), but there is so much more to know. To begin our investigation, we’ll take our simple “Hello” example and see what it looks like when we explicitly create the actions rather than use conventions. Here’s the Xaml:
+We briefly introduced actions in [Pt. 1](./configuration.md), but there is so much more to know. To begin our investigation, we’ll take our simple “Hello” example and see what it looks like when we explicitly create the actions rather than use conventions. Here’s the Xaml:
 
 ---
-><font color="#63aebb" face="微软雅黑">我们在 [Basic Configuration - 基本配置](./configuration) 中简要介绍了 Action，但要知道的还有很多。为了开始我们的研究，我们将以一个简单的 “Hello” 示例为例，看看当我们显式地创建操作而不是使用约定时是什么样子的。这里的Xaml:</font>
+><font color="#63aebb" face="微软雅黑">我们在 [Basic Configuration - 基本配置](./configuration.md) 中简要介绍了 Action，但要知道的还有很多。为了开始我们的研究，我们将以一个简单的 “Hello” 示例为例，看看当我们显式地创建操作而不是使用约定时是什么样子的。这里的Xaml:</font>
 
 ``` xml
 <UserControl x:Class="Caliburn.Micro.Hello.ShellView"
@@ -37,7 +37,7 @@ As you can see, the Actions feature leverages System.Windows.Interactivity for i
 Now you’re probably wondering how to specify the target of an ActionMessage. Looking at the markup above, there’s no visible indication of what that target will be. So, where does that come from? Since we used a Model-First approach, when Caliburn.Micro (hereafter CM) created the view and bound it to the ViewModel using the ViewModelBinder, it set this up for us. Anything that goes through the ViewModelBinder will have its action target set automatically. But, you can set it yourself as well, using the attached property Action.Target. Setting this property positions an ActionMessage “handler” in the Visual Tree attached to the node on with you declare the property. It also sets the DataContext to the same value, since you often want these two things to be the same. However, you can vary the Action.Target from the DataContext if you like. Simply use the Action.TargetWithoutContext attached property instead. One nice thing about Action.Target is that you can set it to a System.String and CM will use that string to resolve an instance from the IoC container using the provided value as its key. This gives you a nice way of doing View-First MVVM if you so desire. If you want Action.Target set and you want Action/Binding Conventions applied as well, you can use the Bind.Model attached property in the same way.
 
 ---
-><font color="#63aebb" face="微软雅黑">现在您可能想知道如何指定 ActionMessage 的目标。看看上面的标记，没有明显的迹象表明目标是什么。那么，这从何而来呢?由于我们使用 Model-First 方法，当 Caliburn.Micro 创建视图并使用 ViewModelBinder 将其绑定到 ViewModel 时，它为我们设置它。通过 ViewModelBinder 的内容都会自动设置其操作目标。您也可以使用附加属性 Action.Target 设置它。设置此属性将 ActionMessage “handler” 放置在定位到节点的可视树中，并声明该属性。它还将 DataContext 设置为相同的值，这两者是相同的。如果您愿意，可以从 DataContext 更改 Action.Target。只需使用 Action.TargetWithoutContext 附加属性即可。Action.Target的一个好处是你可以将它设置为 System.String，CM 将使用该字符串来解析来自 IoC 容器的实例，使用提供的值作为 Key。这提供了一种很好的方式来执行 View-First MVVM。如果您想要设置 Action.Target，并且您也希望应用 Action / Binding Conventions，则可以以相同的方式使用Bind.Model附加属性。</font>
+><font color="#63aebb" face="微软雅黑">现在你可能想知道如何指定 ActionMessage 的目标。看看上面的标记，没有明显的迹象表明目标是什么。那么，这从何而来呢?由于我们使用 Model-First 方法，当 Caliburn.Micro 创建视图并使用 ViewModelBinder 将其绑定到 ViewModel 时，它为我们设置它。通过 ViewModelBinder 的内容都会自动设置其操作目标。你也可以使用附加属性 Action.Target 设置它。设置此属性将 ActionMessage “handler” 放置在定位到节点的可视树中，并声明该属性。它还将 DataContext 设置为相同的值，这两者是相同的。如果你愿意，可以从 DataContext 更改 Action.Target。只需使用 Action.TargetWithoutContext 附加属性即可。Action.Target的一个好处是你可以将它设置为 System.String，CM 将使用该字符串来解析来自 IoC 容器的实例，使用提供的值作为 Key。这提供了一种很好的方式来执行 View-First MVVM。如果你想要设置 Action.Target，并且你也希望应用 Action / Binding Conventions，则可以以相同的方式使用Bind.Model附加属性。</font>
 
 #### View First - 视图优先
 
@@ -174,9 +174,9 @@ One thing that is nice about this is that every time the value of a parameter ch
 In addition to literal values and Binding Expressions, there are a number of helpful “special” values that you can use with parameters. These allow you a convenient way to access common contextual information:
 
 ---
-><font color="#63aebb" face="微软雅黑">这样做的一个好处是，每次参数值发生变化时，我们都会调用与操作关联的方法(本例中是 CanSayHello)，并使用其结果更新 ActionMessage 所附加的 UI。运行应用程序。您将看到它的行为与前面的示例相同。<br><br>
+><font color="#63aebb" face="微软雅黑">这样做的一个好处是，每次参数值发生变化时，我们都会调用与操作关联的方法(本例中是 CanSayHello)，并使用其结果更新 ActionMessage 所附加的 UI。运行应用程序。你将看到它的行为与前面的示例相同。<br><br>
 
-除了字符串和绑定表达式之外，还有许多有用的“特殊”值可以与参数一起使用。这些可以让您方便地访问常见的上下文信息:</font>
+除了字符串和绑定表达式之外，还有许多有用的“特殊”值可以与参数一起使用。这些可以让你方便地访问常见的上下文信息:</font>
 
 <dl>
 	<dt>$eventArgs</dt>
@@ -262,7 +262,7 @@ Now, do you want to see something truly wicked? Change your Xaml back to this:
 Running the application will confirm for you that CM’s conventions even understand ActionMessage parameters. We’ll discuss conventions a lot more in the future, but you should be happy to know that these conventions are case-insensitive and can even detect the before-mentioned “special” values.
 
 ---
-><font color="#63aebb" face="微软雅黑">运行应用程序将确认 CM 的约定，甚至可以理解 ActionMessage 参数。我们将来会讨论更多的约定，但是您应该很高兴地知道这些约定是不区分大小写的，甚至可以检测到前面提到的“特殊”值。</font>
+><font color="#63aebb" face="微软雅黑">运行应用程序将确认 CM 的约定，甚至可以理解 ActionMessage 参数。我们将来会讨论更多的约定，但是你应该很高兴地知道这些约定是不区分大小写的，甚至可以检测到前面提到的“特殊”值。</font>
 
 ### Action Bubbling - 活动冒泡
 
@@ -343,7 +343,7 @@ Now our shell has a collection of Model instances along with the ability to add 
 The first thing to notice is that we are using a more Xaml-developer-friendly mechanism for declaring our ActionMessages. The Message.Attach property is backed by a simple parser which takes its textual input and transforms it into the full Interaction.Trigger/ActionMessage that you’ve seen previously. If you work primarily in the Xaml editor and not in the designer, you’re going to like Message.Attach. Notice that neither Message.Attach declarations specify which event should send the message. If you leave off the event, the parser will use the ConventionManager to determine the default event to use for the trigger. In the case of Button, it’s Click. You can always be explicit of coarse. Here’s what the full syntax for our Remove message would look like if we were declaring everything:
 
 ---
-><font color="#63aebb" face="微软雅黑">首先要注意的是，我们使用了一种对 xaml 开发人员更友好的机制来声明 ActionMessages。Message.Attach 属性由一个简单的解析器支持，解析器接受文本输入并将其转换为完整的交互。您以前见过的 Interaction.Trigger / ActionMessage。如果您主要在 Xaml 编辑器中工作，而不是在设计器中工作，那么您会喜欢 Message.Attach。请注意，Message.Attach声明都没有指定应该发送消息的事件。如果您不在事件中，解析器将使用 ConventionManager 确定用于触发器的默认事件。在按下按钮后解析器将使用常规管理器来确定用于触发器的默认事件。如果我们要声明所有内容，那么删除消息的完整语法如下:</font>
+><font color="#63aebb" face="微软雅黑">首先要注意的是，我们使用了一种对 xaml 开发人员更友好的机制来声明 ActionMessages。Message.Attach 属性由一个简单的解析器支持，解析器接受文本输入并将其转换为完整的交互。你以前见过的 Interaction.Trigger / ActionMessage。如果你主要在 Xaml 编辑器中工作，而不是在设计器中工作，那么你会喜欢 Message.Attach。请注意，Message.Attach声明都没有指定应该发送消息的事件。如果你不在事件中，解析器将使用 ConventionManager 确定用于触发器的默认事件。在按下按钮后解析器将使用常规管理器来确定用于触发器的默认事件。如果我们要声明所有内容，那么删除消息的完整语法如下:</font>
 
 ``` xml
 <Button Content="Remove" cal:Message.Attach="[Event Click] = [Action Remove($dataContext)]" />
@@ -376,13 +376,13 @@ Those developers who ask me to expand this functionality into a full-blown expre
 If you haven’t already, run the application. Any doubts you had will hopefully be put to rest when you see that the message bubbling works as advertised :) Something else I would like to point out is that CM automatically performs type-conversion on parameters. So, for example, you can pump TextBox.Text into a System.Double parameter without any fear of a casting issue.
 
 ---
-><font color="#63aebb" face="微软雅黑">如果您还没有，请运行该应用程序。当你看到消息冒泡像宣传的那样工作时，你所怀疑的任何疑问都会被搁置。我想指出的其他事情是 CM 自动对参数进行类型转换。因此，例如，您可以将 TextBox.Text 放入 System.Double中，而不必担心出现转换问题。</font>
+><font color="#63aebb" face="微软雅黑">如果你还没有，请运行该应用程序。当你看到消息冒泡像宣传的那样工作时，你所怀疑的任何疑问都会被搁置。我想指出的其他事情是 CM 自动对参数进行类型转换。因此，例如，你可以将 TextBox.Text 放入 System.Double中，而不必担心出现转换问题。</font>
 
 So, we’ve discussed using Interaction.Triggers with ActionMessage, including the use of Parameters with literals, element bindings3 and special values. We’ve discussed the various ways to set the action target depending on your needs/architectural style: Action.Target, Action.TargetWithoutContext, Bind.Model or View.Model. We also saw an example of the bubbling nature of ActionMessage and demoed it using the streamlined Message.Attach syntax. All along the way we’ve looked at various examples of conventions in action too. Now, there’s one final killer feature of ActionMessage we haven’t discussed yet…Coroutines. But, that will have to wait until next time.
 
 ---
-><font color="#63aebb" face="微软雅黑">因此，我们讨论了将 Interaction.Triggers 与 ActionMessage 一起使用，包括使用带文字的参数、元素绑定和特殊值。我们已经讨论了根据您的需求/架构风格设置活动目标的各种方法: Action.Target, Action.TargetWithoutContext, Bind.Model 或 View.Model。我们还看到了 ActionMessage 冒泡特性的一个示例，并使用改进的 Message.Attach 语法演示了它。在整个过程中，我们也查看了各种 Action 约定的例子。现在，ActionMessage 还有一个最后的杀手级功能我们还没有讨论过......协同程序。但是，这将不得不等到下一次。</font>
+><font color="#63aebb" face="微软雅黑">因此，我们讨论了将 Interaction.Triggers 与 ActionMessage 一起使用，包括使用带文字的参数、元素绑定和特殊值。我们已经讨论了根据你的需求/架构风格设置活动目标的各种方法: Action.Target, Action.TargetWithoutContext, Bind.Model 或 View.Model。我们还看到了 ActionMessage 冒泡特性的一个示例，并使用改进的 Message.Attach 语法演示了它。在整个过程中，我们也查看了各种 Action 约定的例子。现在，ActionMessage 还有一个最后的杀手级功能我们还没有讨论过......协同程序。但是，这将不得不等到下一次。</font>
 
 
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Working with Windows Phone (Silverlight) - 可用于Windows Phone(Silverlight)](./windows-phone)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Working with Windows Phone (Silverlight) - 可用于Windows Phone(Silverlight)](./windows-phone.md)

@@ -6,7 +6,7 @@ title: All about Conventions
 One of the main features of Caliburn.Micro is manifest in its ability to remove the need for boiler plate code by acting on a series of conventions. Some people love conventions and some hate them. That’s why CM’s conventions are fully customizable and can even be turned off completely if not desired. If you are going to use conventions, and since they are ON by default, it’s good to know what those conventions are and how they work. That’s the subject of this article.
 
 ---
-> <font color="#63aebb" face="微软雅黑">Caliburn.Micro 的主要特征之一就是能够通过一系列约定来消除对样板代码的需求。有些人喜欢约定俗成，有些人讨厌它。这就是为什么 CM 的约定是完全可定制的，甚至可以在不需要时完全关闭。如果您打算使用约定，并且由于它们默认为 ON，那么最好知道这些约定是什么以及它们如何工作。这是本文的主题。</font>
+> <font color="#63aebb" face="微软雅黑">Caliburn.Micro 的主要特征之一就是能够通过一系列约定来消除对样板代码的需求。有些人喜欢约定俗成，有些人讨厌它。这就是为什么 CM 的约定是完全可定制的，甚至可以在不需要时完全关闭。如果你打算使用约定，并且由于它们默认为 ON，那么最好知道这些约定是什么以及它们如何工作。这是本文的主题。</font>
 
 ### View Resolution (ViewModel-First)
 
@@ -40,38 +40,38 @@ public static Func<Type, DependencyObject, object, UIElement> LocateForModelType
 Let’s ignore the “context” variable at first. To derive the view, we make an assumption that you are using the text “ViewModel” in the naming of your VMs, so we just change that to “View” everywhere that we find it by removing the word “Model”. This has the effect of changing both type names and namespaces. So ViewModels.CustomerViewModel would become Views.CustomerView. Or if you are organizing your application by feature: CustomerManagement.CustomerViewModel becomes CustomerManagement.CustomerView. Hopefully, that’s pretty straight forward. Once we have the name, we then search for types with that name. We search any assembly you have exposed to CM as searchable via AssemblySource.Instance.2 If we find the type, we create an instance (or get one from the IoC container if it’s registered) and return it to the caller. If we don’t find the type, we generate a view with an appropriate “not found” message.
 
 ---
-> <font color="#63aebb" face="微软雅黑">我们首先忽略“context”变量。为了得到视图，我们假设您在 VM 的命名中使用了文本“ViewModel”，因此我们只需删除单词 “Model” 将其更改为 “View” 我们就能找到它。这可以改变类型名称和名称空间。所以视图模型。因此 ViewModels.CustomerViewModel 将成为 Views.CustomerView。或者，如果您按功能组织应用程序：CustomerManagement.CustomerViewModel 将成为 CustomerManagement.CustomerView。希望这很简单，一旦我们有了名称，我们就会搜索具有该名称的类型。我们可以通过 AssemblySource.Instance.2 搜索您已公开给 CM 的任何程序集。如果我们找到了类型，我们就创建一个实例（如果已经注册，则从IoC容器中获取一个实例）并将其返回给调用者，如果找不到，我们会生成一个带有 “not found” 消息。</font>
+> <font color="#63aebb" face="微软雅黑">我们首先忽略“context”变量。为了得到视图，我们假设你在 VM 的命名中使用了文本“ViewModel”，因此我们只需删除单词 “Model” 将其更改为 “View” 我们就能找到它。这可以改变类型名称和名称空间。所以视图模型。因此 ViewModels.CustomerViewModel 将成为 Views.CustomerView。或者，如果你按功能组织应用程序：CustomerManagement.CustomerViewModel 将成为 CustomerManagement.CustomerView。希望这很简单，一旦我们有了名称，我们就会搜索具有该名称的类型。我们可以通过 AssemblySource.Instance.2 搜索你已公开给 CM 的任何程序集。如果我们找到了类型，我们就创建一个实例（如果已经注册，则从IoC容器中获取一个实例）并将其返回给调用者，如果找不到，我们会生成一个带有 “not found” 消息。</font>
 
 Now, back to that “context” value. This is how CM supports multiple Views over the same ViewModel. If a context (typically a string or an enum) is provided, we do a further transformation of the name, based on that value. This transformation effectively assumes you have a folder (namespace) for the different views by removing the word “View” from the end and appending the context instead. So, given a context of “Master” our ViewModels.CustomerViewModel would become Views.Customer.Master.
 
 ---
-> <font color="#63aebb" face="微软雅黑">现在，回到那个“context” 的值。这就是 CM 在同一 ViewModel 上支持多个视图的方式。如果提供了上下文（通常是字符串或枚举），我们将根据该值对名称进行进一步转换。通过从末尾删除单词 “View” 并附加上下文，此转换有效地假定您具有不同视图的文件夹（命名空间）。因此，给定 “Master” 的上下文，我们的ViewModels.CustomerViewModel 将成为 Views.Customer.Master。</font>
+> <font color="#63aebb" face="微软雅黑">现在，回到那个“context” 的值。这就是 CM 在同一 ViewModel 上支持多个视图的方式。如果提供了上下文（通常是字符串或枚举），我们将根据该值对名称进行进一步转换。通过从末尾删除单词 “View” 并附加上下文，此转换有效地假定你具有不同视图的文件夹（命名空间）。因此，给定 “Master” 的上下文，我们的ViewModels.CustomerViewModel 将成为 Views.Customer.Master。</font>
 
 ##### Other Things To Know - 其他要知道的
 
 Besides instantiation of your View, GetOrCreateViewType will call InitializeComponent on your View (if it exists). This means that for Views created by the ViewLocator, you don’t have to have code-behinds at all. You can delete them if that makes you happy :) You should also know that ViewLocator.LocateForModelType is never called directly. It is always called indirectly through ViewLocator.LocateForModel. LocateForModel takes an instance of your ViewModel and returns an instance of your View. One of the functions of LocateForModel is to inspect your ViewModel to see if it implements IViewAware. If so, it will call it’s GetView method to see if you have a cached view or if you are handling View creation explicitly. If not, then it passes your ViewModel’s type to LocateForModelType.
 
 ---
-> <font color="#63aebb" face="微软雅黑">除了实例化 View 之外，GetOrCreateViewType 将在 View 上调用 InitializeComponent（如果存在）。这意味着对于 ViewLocator 创建的视图，您根本不必拥有代码隐藏。你可以删除它们，希望这能让你开心:)。你也应该知道 ViewLocator.LocateForModelType 永远不会被直接调用。它总是通过 ViewLocator.LocateForModel 间接调用。LocateForModel 获取 ViewModel 的实例并返回 View 的实例。LocateForModel 的一个功能是检查 ViewModel 以查看它是否实现了 IViewAware。如果是，它将调用 GetView 方法来查看您是否有缓存视图，或者是否显式处理 View 创建。如果没有，那么它将您的 ViewModel 类型传递给 LocateForModelType。</font>
+> <font color="#63aebb" face="微软雅黑">除了实例化 View 之外，GetOrCreateViewType 将在 View 上调用 InitializeComponent（如果存在）。这意味着对于 ViewLocator 创建的视图，你根本不必拥有代码隐藏。你可以删除它们，希望这能让你开心:)。你也应该知道 ViewLocator.LocateForModelType 永远不会被直接调用。它总是通过 ViewLocator.LocateForModel 间接调用。LocateForModel 获取 ViewModel 的实例并返回 View 的实例。LocateForModel 的一个功能是检查 ViewModel 以查看它是否实现了 IViewAware。如果是，它将调用 GetView 方法来查看你是否有缓存视图，或者是否显式处理 View 创建。如果没有，那么它将你的 ViewModel 类型传递给 LocateForModelType。</font>
 
 ##### Customization - 自定义
 
 The out-of-the-box convention is pretty simple and based on a number of patterns we’ve used and seen others use in the real world. However, by no means are you limited to these simple patterns. You’ll notice that all the methods discussed above are implemented as Funcs rather than actual methods. This means that you can customize them by simply replacing them with your own implementations. If you just want to add to the existing behavior, simply store the existing Func in a variable, create a new Func that calls the old and and assign the new Func to ViewLocator.LocateForModelType.
 
 ---
-> <font color="#63aebb" face="微软雅黑">开箱即用的约定非常简单，它基于我们在现实世界中使用和看到的许多模式。但是，绝不仅限于这些简单的模式。您会注意到上面讨论的所有方法都是以 Funcs 而不是实际方法实现的。这意味着您可以通过简单地将它们替换为您自己的实现来自定义它们。如果您只想添加到现有行为，只需将现有 Func 存储在变量中，创建一个调用旧函数的新 Func，并将新 Func 分配给 ViewLocator.LocateForModelType。</font>
+> <font color="#63aebb" face="微软雅黑">开箱即用的约定非常简单，它基于我们在现实世界中使用和看到的许多模式。但是，绝不仅限于这些简单的模式。你会注意到上面讨论的所有方法都是以 Funcs 而不是实际方法实现的。这意味着你可以通过简单地将它们替换为你自己的实现来自定义它们。如果你只想添加到现有行为，只需将现有 Func 存储在变量中，创建一个调用旧函数的新 Func，并将新 Func 分配给 ViewLocator.LocateForModelType。</font>
 
 **v1.1 Changes** In v1.1 we've completely changed the implementation of the LocateForModelType func. We now use an instance of our new NameTransformer class with pre-configured RexEx-based rules to do the name mapping. We support the same conventions out of the box as before, but you can now more easily add custom transformation rules.
 
 ---
-> **v1.1 的改变** <font color="#63aebb" face="微软雅黑">在 v1.1 中的变化我们完全改变了 LocateForModelType func 的实现。现在，我们使用新 NameTransformer 类的一个实例和预配置的基于 RexEx-based 的规则来进行名称映射。我们支持与以前一样的开箱即用的相同约定，但您现在可以更轻松地添加自定义转换规则。</font>
+> **v1.1 的改变** <font color="#63aebb" face="微软雅黑">在 v1.1 中的变化我们完全改变了 LocateForModelType func 的实现。现在，我们使用新 NameTransformer 类的一个实例和预配置的基于 RexEx-based 的规则来进行名称映射。我们支持与以前一样的开箱即用的相同约定，但你现在可以更轻松地添加自定义转换规则。</font>
 
 ##### Framework Usage - 框架用法
 
 There are three places that the framework uses the ViewLocator; three places where you can expect the view location conventions to be applied. The first place is in Bootstrapper<T>. Here, your root ViewModel is passed to the locator in order to determine how your application’s shell should be rendered. In Silverlight this results in the setting or your RootVisual. In WPF, this creates your MainWindow. In fact, in WPF the bootstrapper delegates this to the WindowManager, which brings me to… The second place the ViewLocator is used is the WindowManager, which calls it to determine how any dialog ViewModels should be rendered. The third and final place that leverages these conventions is the View.Model attached property. Whenever you do ViewModel-First composition rendering by using the View.Model attached property on a UIElement, the locator is invoked to see how that composed ViewModel should be rendered at that location in the UI. You can use the View.Model attached property explicitly in your UI (optionally combining it with the View.Context attached property for contextual rendering), or it can be added by convention, thus causing conventional composition of views to occur. See the section below on property binding conventions.
 
 ---
-> <font color="#63aebb" face="微软雅黑">框架使用 ViewLocator 有三个地方; 您可以期望应用视图位置约定的三个位置。第一个是 Bootstrapper。在这里，您的根 ViewModel 将传递给 Bootstrapper<T>，以确定应该如何呈现应用程序的 shell。在 Silverlight 中，会设置RootVisual。在 WPF 中，这将创建您的 MainWindow。实际上，在WPF中，引导程序将这个委托给WindowManager，这让我想到…使用ViewLocator的第二个地方是WindowManager，它调用它来确定应该如何呈现任何对话框 ViewModel。利用这些约定的第三个也是最后一个是 View.Model 附加属性。每当您使用 UIElement 上的 View.Model  附加属性执行ViewModel-First 组合渲染时，调用定位器以查看应如何在 UI 中的该位置呈现组合的 ViewModel。您可以在UI中显式使用 View.Model 附加属性（可选地将其与用于上下文呈现的 View.Context 附加属性组合），或者可以按惯例添加它，从而导致产生传统的视图组合。请参阅下面有关属性绑定约定的部分。</font>
+> <font color="#63aebb" face="微软雅黑">框架使用 ViewLocator 有三个地方; 你可以期望应用视图位置约定的三个位置。第一个是 Bootstrapper。在这里，你的根 ViewModel 将传递给 Bootstrapper<T>，以确定应该如何呈现应用程序的 shell。在 Silverlight 中，会设置RootVisual。在 WPF 中，这将创建你的 MainWindow。实际上，在WPF中，引导程序将这个委托给WindowManager，这让我想到…使用ViewLocator的第二个地方是WindowManager，它调用它来确定应该如何呈现任何对话框 ViewModel。利用这些约定的第三个也是最后一个是 View.Model 附加属性。每当你使用 UIElement 上的 View.Model  附加属性执行ViewModel-First 组合渲染时，调用定位器以查看应如何在 UI 中的该位置呈现组合的 ViewModel。你可以在UI中显式使用 View.Model 附加属性（可选地将其与用于上下文呈现的 View.Context 附加属性组合），或者可以按惯例添加它，从而导致产生传统的视图组合。请参阅下面有关属性绑定约定的部分。</font>
 
 ### ViewModel Resolution (View-First) - ViewModel 解析 (View-First)
 
@@ -80,21 +80,21 @@ There are three places that the framework uses the ViewLocator; three places whe
 Though Caliburn.Micro prefers ViewModel-First development, there are times when you may want to take a View-First approach, especially when working with WP7. In the case where you start with a view, you will likely then need to resolve a ViewModel. We use a similar naming convention for this scenario as we did with view location. This is handled by ViewModelLocator.LocateForViewType. While with View location we change instances of “ViewModel” to “View”, with ViewModel location we change “View” to “ViewModel.” The other interesting difference is in how we get the instance of the ViewModel itself. Because your ViewModels may be registered by an interface or a concrete class we attempt to generate possible interface names as well. If we find a match, we resolve it from the IoC container.
 
 ---
-> <font color="#63aebb" face="微软雅黑">虽然Caliburn.Micro更喜欢ViewModel-First开发，但有时你可能想采用View-First方法，特别是在使用WP7时。如果您从视图开始，则可能需要解析ViewModel。我们使用与此视图位置类似的命名约定。这由ViewModelLocator.LocateForViewType处理。使用 View 定位时，我们将 “ViewModel” 的实例更改为 “View”，使用 ViewModel 定位我们将 “View” 更改为 “ViewModel”。另一个有趣的区别在于我们如何获取ViewModel本身的实例。因为ViewModel可能是由接口或具体类注册的，所以我们也尝试生成可能的接口名称。如果我们找到匹配项，我们将从IoC容器中解析它。</font>
+> <font color="#63aebb" face="微软雅黑">虽然Caliburn.Micro更喜欢ViewModel-First开发，但有时你可能想采用View-First方法，特别是在使用WP7时。如果你从视图开始，则可能需要解析ViewModel。我们使用与此视图位置类似的命名约定。这由ViewModelLocator.LocateForViewType处理。使用 View 定位时，我们将 “ViewModel” 的实例更改为 “View”，使用 ViewModel 定位我们将 “View” 更改为 “ViewModel”。另一个有趣的区别在于我们如何获取ViewModel本身的实例。因为ViewModel可能是由接口或具体类注册的，所以我们也尝试生成可能的接口名称。如果我们找到匹配项，我们将从IoC容器中解析它。</font>
 
 ##### Other Things To Know - 其他需要知道的
 
 ViewModelLocator.LocateForViewType is actually never called directly by the framework. It’s called internally by ViewModelLocator.LocateForView. LocateForView first checks your View instance’s DataContext to see if you’ve previous cached or custom created your ViewModel. If the DataContext is null, only then will it call into LocateForViewType. A final thing to note is that automatic InitializeComponent calls are not supported by view first, by its nature.
 
 ---
-> <font color="#63aebb" face="微软雅黑">ViewModelLocator.LocateForViewType 实际上永远不会被框架直接调用。它由 ViewModelLocator.LocateForView 在内部调用。LocateForView 首先检查 View 实例的 DataContext，看您是否已缓存或自定义 ViewModel。如果 DataContext 为 null，则只会调用 LocateForViewType。最后要注意的是，View First 不支持自动 InitializeComponent 调用。</font>
+> <font color="#63aebb" face="微软雅黑">ViewModelLocator.LocateForViewType 实际上永远不会被框架直接调用。它由 ViewModelLocator.LocateForView 在内部调用。LocateForView 首先检查 View 实例的 DataContext，看你是否已缓存或自定义 ViewModel。如果 DataContext 为 null，则只会调用 LocateForViewType。最后要注意的是，View First 不支持自动 InitializeComponent 调用。</font>
 
 ##### Customization - 自定义
 
 In v1.1 we've completely changed the implementation of the LocateForViewType func. We now use an instance of our new NameTransformer class with pre-configured RexEx-based rules to do the name mapping. We support the same conventions out of the box as before, but you can now more easily add custom transformation rules.
 
 ---
-> <font color="#63aebb" face="微软雅黑">在v1.1中，我们完全改变了 LocateForViewType func 的实现。现在，我们使用新 NameTransformer 类的实例和预配置的基于 RexEx-based 规则来进行名称映射。我们支持与以前一样的开箱即用约定，但是现在您可以更轻松地添加定制转换规则。</font>
+> <font color="#63aebb" face="微软雅黑">在v1.1中，我们完全改变了 LocateForViewType func 的实现。现在，我们使用新 NameTransformer 类的实例和预配置的基于 RexEx-based 规则来进行名称映射。我们支持与以前一样的开箱即用约定，但是现在你可以更轻松地添加定制转换规则。</font>
 
 ##### Framework Usage - 框架使用
 
@@ -110,7 +110,7 @@ The ViewModelLocator is only used by the WP7 version of the framework. It’s us
 When we bind together your View and ViewModel, regardless of whether you use a ViewModel-First or a View-First approach, the ViewModelBinder.Bind method is called. This method sets the Action.Target of the View to the ViewModel and correspondingly sets the DataContext to the same value.4 It also checks to see if your ViewModel implements IViewAware, and if so, passes the View to your ViewModel. This allows for a more SupervisingController style design, if that fits your scenario better. The final important thing the ViewModelBinder does is determine if it needs to create any conventional property bindings or actions. To do this, it searches the UI for a list of element candidates for bindings/actions and compares that against the properties and methods of your ViewModel. When a match is found, it creates the binding or the action on your behalf.
 
 ---
-> <font color="#63aebb" face="微软雅黑">当我们将View和ViewModel绑定在一起时，无论您使用的是ViewModel-First还是View-First方法，都会调用ViewModelBinder.Bind方法。此方法将View的Action.Target设置为ViewModel并相应地将DataContext设置为相同的值。它还会检查ViewModel是否实现IViewAware，如果是，则将View传递给ViewModel。为了更适合您的场景，允许更多的 SupervisingController 样式设计。ViewModelBinder 最重要的事情是确定它是否需要创建任何传统的属性绑定或操作。为此，它在 UI 中搜索绑定/操作的候选元素列表，并将其与 ViewModel 的属性和方法进行比较。找到匹配项后，它会为您创建绑定或操作。</font>
+> <font color="#63aebb" face="微软雅黑">当我们将View和ViewModel绑定在一起时，无论你使用的是ViewModel-First还是View-First方法，都会调用ViewModelBinder.Bind方法。此方法将View的Action.Target设置为ViewModel并相应地将DataContext设置为相同的值。它还会检查ViewModel是否实现IViewAware，如果是，则将View传递给ViewModel。为了更适合你的场景，允许更多的 SupervisingController 样式设计。ViewModelBinder 最重要的事情是确定它是否需要创建任何传统的属性绑定或操作。为此，它在 UI 中搜索绑定/操作的候选元素列表，并将其与 ViewModel 的属性和方法进行比较。找到匹配项后，它会为你创建绑定或操作。</font>
 
 ##### Other Things To Know - 其他需要知道的
 
@@ -122,21 +122,21 @@ On the WP7 platform, if the View you are binding is a PhoneApplicationPage, this
 > <font color="#63aebb" face="微软雅黑">在所有平台上，约定不能应用于 DataTemplate 的内容。这是当前 Xaml 模板系统的限制。我已经要求微软解决这个问题，但我怀疑他们会做出回应。因此，为了将 Binding 和 Action 约定应用于 DataTemplate，必须将 Bind.Model = “{Binding}”附加属性添加到 DataTemplate 内的根元素。这为 Caliburn.Micro 提供了必要的钩子，以便在每次从 DataTemplate 实例化UI时应用它的约定。</font>
 
 ---
-> <font color="#63aebb" face="微软雅黑">在WP7平台上，如果您要绑定的View是PhoneApplicationPage，则此服务负责将操作连接到ApplicationBar的按钮和菜单。有关详细信息，请参阅WP7特定文档。</font>
+> <font color="#63aebb" face="微软雅黑">在WP7平台上，如果你要绑定的View是PhoneApplicationPage，则此服务负责将操作连接到ApplicationBar的按钮和菜单。有关详细信息，请参阅WP7特定文档。</font>
 
 ##### Customization - 自定义
 
 Should you decide that you don’t like the behavior of the ViewModelBinder (more details below), it follows the same patterns as the above framework services. It has several Funcs you can replace with your own implementations, such as Bind, BindActions and BindProperties. Probably the most important aspect of customization though, is the ability to turn off the binder’s convention features. To do this, set ViewModelBinder.ApplyConventionsByDefault to false. If you want to enable it on a view-by-view basis, you can set the View.ApplyConventions attached property to true on your View. This attached property works both ways. So, if you have conventions on by default, but need to turn them off on a view-by-view basis, you just set this property to false.
 
 ---
-> <font color="#63aebb" face="微软雅黑">如果您决定不喜欢ViewModelBinder的行为（下面有更多详细信息），它将遵循与上述框架服务相同的模式。它有几个Func可以替换为您自己的实现，例如Bind，BindActions和BindProperties。自定义最重要的方面可能是关闭绑定器的约定功能。为此，请将 ViewModelBinder.ApplyConventionsByDefault 设置为 false。如果要在逐个视图的基础上启用它，可以在 View 上将 View.ApplyConventions  附加属性设置为true。这个附加的属性是双向的。因此，如果您默认启用约定，但需要在逐个视图的基础上关闭它们，则只需将此属性设置为 false 即可。</font>
+> <font color="#63aebb" face="微软雅黑">如果你决定不喜欢ViewModelBinder的行为（下面有更多详细信息），它将遵循与上述框架服务相同的模式。它有几个Func可以替换为你自己的实现，例如Bind，BindActions和BindProperties。自定义最重要的方面可能是关闭绑定器的约定功能。为此，请将 ViewModelBinder.ApplyConventionsByDefault 设置为 false。如果要在逐个视图的基础上启用它，可以在 View 上将 View.ApplyConventions  附加属性设置为true。这个附加的属性是双向的。因此，如果你默认启用约定，但需要在逐个视图的基础上关闭它们，则只需将此属性设置为 false 即可。</font>
 
 ##### Framework Usage - 框架使用
 
 The ViewModelBinder is used in three places inside of Caliburn.Micro. The first place is inside the implementation of the View.Model attached property. This property takes your ViewModel, locates a view using the ViewLocator and then passes both of them along to the ViewModelBinder. After binding is complete, the View is injected inside the element on which the property is defined. That’s the ViewModel-First usage pattern. The second place that uses the ViewModelBinder is inside the implementation of the Bind.Model attached property. This property takes a ViewModel and passes it along with the element on which the property is defined to the ViewModelBinder. In other words, this is View-First, since you have already instantiated the View inline in your Xaml and are then just invoking the binding against a ViewModel. The final place that the ViewModelBinder is used is in the WP7 version of the framework. Inside of the FrameAdapter, when a page is navigated to, the ViewModelLocator is first used to obtain the ViewModel for that page. Then, the ViewModelBinder is uses to connect the ViewModel to the page.
 
 ---
-> <font color="#63aebb" face="微软雅黑">ViewModelBinder 用于 Caliburn.Micro 内的三个地方。首先是 View.Model 附加属性的实现。此属性使用 ViewModel，使用 ViewLocator 定位视图，然后将它们传递给 ViewModelBinder。绑定完成后，View 将在定义属性的元素内注入。这是 ViewModel-First 使用模式。第二个地方是 Bind.Model 附加属性的实现。此属性采用 ViewModel 并将其与定义属性的元素一起传递给 ViewModelBinder。换句话说，这是View-First，因为您已经在 Xaml 中实例化了 View inline，然后只是调用 ViewModel 的绑定。最后是 WP7 框架的版本。在 FrameAdapter 内部，当页面导航到时，ViewModelLocator 首先用于获取该页面的ViewModel。然后，ViewModelBinder 用于将 ViewModel 连接到页面。</font>
+> <font color="#63aebb" face="微软雅黑">ViewModelBinder 用于 Caliburn.Micro 内的三个地方。首先是 View.Model 附加属性的实现。此属性使用 ViewModel，使用 ViewLocator 定位视图，然后将它们传递给 ViewModelBinder。绑定完成后，View 将在定义属性的元素内注入。这是 ViewModel-First 使用模式。第二个地方是 Bind.Model 附加属性的实现。此属性采用 ViewModel 并将其与定义属性的元素一起传递给 ViewModelBinder。换句话说，这是View-First，因为你已经在 Xaml 中实例化了 View inline，然后只是调用 ViewModel 的绑定。最后是 WP7 框架的版本。在 FrameAdapter 内部，当页面导航到时，ViewModelLocator 首先用于获取该页面的ViewModel。然后，ViewModelBinder 用于将 ViewModel 连接到页面。</font>
 
 ### Element Location - 元素定位
 
@@ -145,7 +145,7 @@ The ViewModelBinder is used in three places inside of Caliburn.Micro. The first 
 Now that you understand the basic role of the ViewModelBinder and where it is used by the framework, I want to dig into the details of how it applies conventions. As mentioned above, the ViewModelBinder “searches the UI for a list of element candidates for bindings/actions and compares that against the properties and methods of your ViewModel.” The first step in understanding how this works is knowing how the framework determines which elements in your UI may be candidates for conventions. It does this by using a func on the static ExtensionMethods class called GetNamedElementsInScope.5 Basically this method does two things. First, it identifies a scope to search for elements in. This means it walks the tree until it finds a suitable root node, such as a Window, UserControl or element without a parent (indicating that we are inside a DataTemplate). Once it defines the “outer” borders of the scope, it begins it’s second task: locating all elements in that scope that have names. The search is careful to respect an “inner” scope boundary by not traversing inside of child user controls. The elements that are returned by this function are then used by the ViewModelBinder to apply conventions.
 
 ---
-> <font color="#63aebb" face="微软雅黑">现在您已经了解了 ViewModelBinder 的基本角色以及框架在哪里使用它，接下来我将深入了解它如何应用约定。如上所述，ViewModelBinder 在UI中搜索绑定/操作的候选元素列表，并将其与ViewModel的属性和方法进行比较。”了解其工作原理的第一步是了解框架如何确定哪些元素在您的UI可能是约定的候选者。它通过在名为GetNamedElementsInScope的静态ExtensionMethods类上使用func来实现这一点。基本上这个方法做了两件事，首先，它确定了搜索元素的范围。这意味着它将遍历树，直到找到合适的根节点，例如没有父节点的 Window、UserControl 或元素(表明我们在 DataTemplate 中)。一旦定义了作用域的“外部”边界，它就开始了它的第二个任务：找到该作用域中具有名称的所有元素。搜索不遍历子用户控件内部来遵守“内部”范围边界。然后，ViewModelBinder 使用此函数返回的元素来应用约定。</font>
+> <font color="#63aebb" face="微软雅黑">现在你已经了解了 ViewModelBinder 的基本角色以及框架在哪里使用它，接下来我将深入了解它如何应用约定。如上所述，ViewModelBinder 在UI中搜索绑定/操作的候选元素列表，并将其与ViewModel的属性和方法进行比较。”了解其工作原理的第一步是了解框架如何确定哪些元素在你的UI可能是约定的候选者。它通过在名为GetNamedElementsInScope的静态ExtensionMethods类上使用func来实现这一点。基本上这个方法做了两件事，首先，它确定了搜索元素的范围。这意味着它将遍历树，直到找到合适的根节点，例如没有父节点的 Window、UserControl 或元素(表明我们在 DataTemplate 中)。一旦定义了作用域的“外部”边界，它就开始了它的第二个任务：找到该作用域中具有名称的所有元素。搜索不遍历子用户控件内部来遵守“内部”范围边界。然后，ViewModelBinder 使用此函数返回的元素来应用约定。</font>
 
 ##### Other Things To Know - 其他需要知道的
 
@@ -159,14 +159,14 @@ There are a few limitations to what the GetNamedElementsInScope method can accom
 You may not encounter issues related to the above limitations of element location. But if you do, you can easily replace the default implementation with your own. Here’s an interesting technique you might choose to use: If the view is a UserControl or Window, instead of walking the tree for elements, use some reflection to discover all private fields that inherit from FrameworkElement. We know that when Xaml files are compiled, a private field is created for everything with an x:Name. Use this to your advantage. You will have to fall back to the existing implementation for DataTemplate UI though. I don’t provide this implementation out-of-the-box, because it is not guaranteed to succeed in Silverlight. The reason is due to the fact that Silverlight doesn’t allow you to get the value of a private field unless the calling code is the code that defines the field. However, if all of your views are defined in a single assembly, you can easily make the modification I just described by creating your new implementation in the same assembly as the views. Furthermore, if you have a multi-assembly project, you could write a little bit of plumbing code that would allow the GetNamedElementsInScope Func to find the assembly-specific implementation which could actually perform the reflection.
 
 ---
-> <font color="#63aebb" face="微软雅黑">您可能不会遇到与上述元素位置限制相关的问题。但是如果您这样做了，您可以很容易地用自己的实现替换默认的实现。这里有一个您可以选择使用的有趣技术:如果视图是 UserControl 或 Window，而不是遍历树中的元素，那么使用一些反射来发现从 FrameworkElement 继承的所有私有字段。我们知道，在编译 Xaml 文件时，会为所有 x:Name 创建一个私有字段。利用这个优势，不过，您必须返回 DataTemplate UI的现有实现。我不提供开箱即用的实现，因为它不能保证在 Silverlight 中成功。原因是 Silverlight 不允许获取私有字段的值，除非调用代码是定义字段的代码。但是，如果您的所有视图都在一个程序集中定义，则可以通过在与视图相同的程序集中创建新实现来轻松地进行我刚刚描述的修改。此外，如果您有一个多组件项目，您可以编写一些管道代码，以允许 GetNamedElementsInScope Func 查找可以实际执行反射的特定于程序集的实现。</font>
+> <font color="#63aebb" face="微软雅黑">你可能不会遇到与上述元素位置限制相关的问题。但是如果你这样做了，你可以很容易地用自己的实现替换默认的实现。这里有一个你可以选择使用的有趣技术:如果视图是 UserControl 或 Window，而不是遍历树中的元素，那么使用一些反射来发现从 FrameworkElement 继承的所有私有字段。我们知道，在编译 Xaml 文件时，会为所有 x:Name 创建一个私有字段。利用这个优势，不过，你必须返回 DataTemplate UI的现有实现。我不提供开箱即用的实现，因为它不能保证在 Silverlight 中成功。原因是 Silverlight 不允许获取私有字段的值，除非调用代码是定义字段的代码。但是，如果你的所有视图都在一个程序集中定义，则可以通过在与视图相同的程序集中创建新实现来轻松地进行我刚刚描述的修改。此外，如果你有一个多组件项目，你可以编写一些管道代码，以允许 GetNamedElementsInScope Func 查找可以实际执行反射的特定于程序集的实现。</font>
 
 ##### Framework Usage - 框架使用
 
 I’ve already mentioned that element location occurs when the ViewModelBinder attempts to bind properties or methods by convention. But, there is a second place that uses this functionality: the Parser. Whenever you use Message.Attach and your action contains parameters, the message parser has to find the elements that you are using as parameter inputs. It would seem that we could just do a simple FindName, but FindName is case-sensitive. As a result, we have to use our custom implementation which does a case-insensitive search. This ensures that the same semantics for binding are used in both places.
 
 ---
-> <font color="#63aebb" face="微软雅黑">我已经提到，当 ViewModelBinder 尝试按约定绑定属性或方法时，会定位元素位置。但是，还有第二个使用此功能的地方：Parser。每当您使用 Message.Attach 并且您的操作包含参数时，消息解析器必须找到您用作参数输入的元素。看起来我们可以只做一个简单的 FindName，但 FindName 是区分大小写的。因此，我们必须使用我们的自定义实现，它执行不区分大小写的搜索。这确保了在两个地方都使用相同的绑定语义。</font>
+> <font color="#63aebb" face="微软雅黑">我已经提到，当 ViewModelBinder 尝试按约定绑定属性或方法时，会定位元素位置。但是，还有第二个使用此功能的地方：Parser。每当你使用 Message.Attach 并且你的操作包含参数时，消息解析器必须找到你用作参数输入的元素。看起来我们可以只做一个简单的 FindName，但 FindName 是区分大小写的。因此，我们必须使用我们的自定义实现，它执行不区分大小写的搜索。这确保了在两个地方都使用相同的绑定语义。</font>
 
 ### Action Matching - 活动匹配
 
@@ -175,7 +175,7 @@ I’ve already mentioned that element location occurs when the ViewModelBinder a
 The next thing the ViewModelBinder does after locating the elements for convention bindings is inspect them for matches to methods on the ViewModel. It does this by using a bit of reflection to get the public methods of the ViewModel. It then loops over them looking for a case-insensitive name match with an element. If a match is found, and there aren’t any pre-existing Interaction.Triggers on the element, an action is attached. The check for pre-existing triggers is used to prevent the convention system from creating duplicate actions to what the developer may have explicitly declared in the markup. To be on the safe side, if you have declared any triggers on the matched element, it is skipped.
 
 ---
-> <font color="#63aebb" face="微软雅黑">在定位了约定绑定的元素之后，ViewModelBinder 接下来会检查它们是否与 ViewModel 上的方法匹配。它通过使用一些反射来获取 ViewModel 的公共方法。然后它循环遍历它们，寻找与元素不区分大小写的名称。如果找到匹配项，并且元素上没有任何预先存在的 Interaction.Triggers，则会附加一个操作。检查预先存在的触发器用于防止约定系统对开发人员可能在标记中明确声明的内容创建重复操作。为了安全起见，如果您在匹配的元素上声明了触发器，则会跳过它。</font>
+> <font color="#63aebb" face="微软雅黑">在定位了约定绑定的元素之后，ViewModelBinder 接下来会检查它们是否与 ViewModel 上的方法匹配。它通过使用一些反射来获取 ViewModel 的公共方法。然后它循环遍历它们，寻找与元素不区分大小写的名称。如果找到匹配项，并且元素上没有任何预先存在的 Interaction.Triggers，则会附加一个操作。检查预先存在的触发器用于防止约定系统对开发人员可能在标记中明确声明的内容创建重复操作。为了安全起见，如果你在匹配的元素上声明了触发器，则会跳过它。</font>
 
 ##### Other Things To Know - 其他需要知道的
 
@@ -211,7 +211,7 @@ Message.SetAttach(foundControl, message);
 As you can see, we build a string representing the message. This string contains only the action part of the message; no event is declared. You can also see that it loops through the parameters of the method so that they are included in the action. If the parameter name is the same as a special parameter value, we make sure to append the “$” to it so that it will be recognized correctly by the Parser and later by the MessageBinder when the action is invoked.
 
 ---
-> <font color="#63aebb" face="微软雅黑">如您所见，我们构建了一个表示消息的字符串。此字符串仅包含消息的操作部分;没有声明任何事件。您还可以看到它循环遍历方法的参数，以便它们包含在操作中。如果参数名称与特殊参数值相同，我们确保将 “$” 附加到它，以便解析器能够正确地识别它，由 MessageBinder 调用。</font>
+> <font color="#63aebb" face="微软雅黑">如你所见，我们构建了一个表示消息的字符串。此字符串仅包含消息的操作部分;没有声明任何事件。你还可以看到它循环遍历方法的参数，以便它们包含在操作中。如果参数名称与特殊参数值相同，我们确保将 “$” 附加到它，以便解析器能够正确地识别它，由 MessageBinder 调用。</font>
 
 When the Message.Attach property is set, the Parser immediately kicks in to convert the string message into some sort of TriggerBase with an associated ActionMessage. Because we don’t declare an event as part of the message, the Parser looks up the default Trigger for the type of element that the message is being attached to. For example, if the message was being attached to a Button, then we would get an EventTrigger with it’s Event set to Click. This information is configured through the ConventionManager with reasonable defaults out-of-the-box. See the sections on ConventionManager and ElementConventions below for more information on that. The ElementConvention is used to create the Trigger and then the parser converts the action information into an ActionMessage. The two are connected together and then added to the Interaction.Triggers collection of the element.
 
@@ -288,7 +288,7 @@ I mentioned above that “CM defines a basic implementation of ApplyBinding for 
 Since this template creates a ContentControl with a View.Model attached property, we create the possibility of rich composition for ItemsControls. So, whatever the Item is, the View.Model attached property allows us to invoke the ViewModel-First workflow: locate the view for the item, pass the item and the view to the ViewModelBinder (which in turn sets it’s own conventions, possibly invoking more composition) and then take the view and inject it into the ContentControl. Selectors have the same behavior as ItemsControls, but with an additional convention around the SelectedItem property. Let’s say that your Selector is called Items. We follow the above conventions first by binding ItemsSource to Items and detecting whether or not we need to add a default DataTemplate. Then, we check to see if the SelectedItem property has been bound. If not, we look for three candidate properties on the ViewModel that could be bound to SelectedItem: ActiveItem, SelectedItem and CurrentItem. If we find one of these, we add the binding. So, the pattern here is that we first call ConventionManager.Singularize on the collection property’s name. In this case “Items” becomes “Item” Then we call ConventionManager.DerivePotentialSelectionNames which prepends “Active” “Selected” and “Current” to “Item” to make the three candidates above. Then, we create a binding if we find one of these on the ViewModel. For WPF, we have a special ApplyBinding behavior for the TabControl.8 It takes on all the conventions of Selector (setting it’s ContentTemplate instead of ItemTemplate to the DefaultDataTemplate), plus an additional convention for the tab header’s content. If the TabControl’s DisplayMemberPath is not set and the ViewModel implements IHaveDisplayName, then we set it’s ItemTemplate to the DefaultHeaderTemplate, which looks like this:
 
 ---
-> <font color="#63aebb" face="微软雅黑">由于此模板创建了一个带 有 View.Model 附加属性的 ContentControl，因此我们为 ItemsControls 创建了丰富组合的可能性。因此，无论 Item 是什么，View.Model 附加属性允许我们调用 ViewModel-First 工作流：找到项的视图，将项和视图传递给 ViewModelBinder（它依次设置自己的约定，可能调用更多的组合）然后获取视图并将其注入 ContentControl。选择器具有与 ItemsControls 相同的行为，但是有一个关于 SelectedItem 属性的附加约定。假设您的选择器名为 Items。我们首先遵循上述约定，将 ItemsSource 绑定到项，并检测是否需要添加默认 DataTemplate。然后，我们检查 SelectedItem 属性是否已绑定。如果没有，我们在 ViewModel 上查找三个可能绑定到 SelectedItem 的候选属性:ActiveItem，SelectedItem和CurrentItem。如果找到其中一个，就添加绑定。所以，这里的模式是我们首先在集合属性的名称上调用 ConventionManager.Singularize。在这种情况下， “Items” 变为 “Item” 然后我们调用 ConventionManager.DerivePotentialSelectionNames，它将 “Active”、“Selected” 和 “Current” 添加到 “Item” 以构成上述三个候选项。然后，如果我们在 ViewModel 上找到其中一个，我们就会创建一个绑定。对于 WPF，我们对 TabControl 具有特殊的 ApplyBinding 行为。它采用 Selector 的所有约定（将它的 ContentTemplate 而不是 ItemTemplate 设置为 DefaultDataTemplate），并为 tab Header 的内容添加一个额外的约定。如果未设置 TabControl 的 DisplayMemberPath，而 ViewModel 实现了IHaveDisplayName，那么我们将它的 ItemTemplate 设置为 DefaultHeaderTemplate，如下所示:</font>
+> <font color="#63aebb" face="微软雅黑">由于此模板创建了一个带 有 View.Model 附加属性的 ContentControl，因此我们为 ItemsControls 创建了丰富组合的可能性。因此，无论 Item 是什么，View.Model 附加属性允许我们调用 ViewModel-First 工作流：找到项的视图，将项和视图传递给 ViewModelBinder（它依次设置自己的约定，可能调用更多的组合）然后获取视图并将其注入 ContentControl。选择器具有与 ItemsControls 相同的行为，但是有一个关于 SelectedItem 属性的附加约定。假设你的选择器名为 Items。我们首先遵循上述约定，将 ItemsSource 绑定到项，并检测是否需要添加默认 DataTemplate。然后，我们检查 SelectedItem 属性是否已绑定。如果没有，我们在 ViewModel 上查找三个可能绑定到 SelectedItem 的候选属性:ActiveItem，SelectedItem和CurrentItem。如果找到其中一个，就添加绑定。所以，这里的模式是我们首先在集合属性的名称上调用 ConventionManager.Singularize。在这种情况下， “Items” 变为 “Item” 然后我们调用 ConventionManager.DerivePotentialSelectionNames，它将 “Active”、“Selected” 和 “Current” 添加到 “Item” 以构成上述三个候选项。然后，如果我们在 ViewModel 上找到其中一个，我们就会创建一个绑定。对于 WPF，我们对 TabControl 具有特殊的 ApplyBinding 行为。它采用 Selector 的所有约定（将它的 ContentTemplate 而不是 ItemTemplate 设置为 DefaultDataTemplate），并为 tab Header 的内容添加一个额外的约定。如果未设置 TabControl 的 DisplayMemberPath，而 ViewModel 实现了IHaveDisplayName，那么我们将它的 ItemTemplate 设置为 DefaultHeaderTemplate，如下所示:</font>
 
 ``` xml
 <DataTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
@@ -310,7 +310,7 @@ In addition to the special cases listed above, we have one more that is importan
 I hope you will find that these special cases make sense when you think about them. As always, if you don’t like them, you can change them…
 
 ---
-> <font color="#63aebb" face="微软雅黑">除了上面列出的特殊情况之外，我们还有一个非常重要的内容：ContentControl。在本例中，我们不提供自定义的 ApplyBinding Func，但我们提供了自定义的 GetBindableProperty Func。对于 ContentControl，当我们决定绑定到哪个属性时，我们检查 ContentTemplate 和 ContentTemplateSelector (WPF)。如果它们都为 null，则没有为模型指定渲染器。因此，我们假设您要使用 ViewModel-First 工作流程。我们通过让 GetBindableProperty Func 返回 View.Model 作为要绑定的属性。其它情况下，ContentControl 将绑定在 Content 属性上。在没有 ContentTemplate 的情况下选择 View.Model 属性，我们启用了丰富的组合。<br>
+> <font color="#63aebb" face="微软雅黑">除了上面列出的特殊情况之外，我们还有一个非常重要的内容：ContentControl。在本例中，我们不提供自定义的 ApplyBinding Func，但我们提供了自定义的 GetBindableProperty Func。对于 ContentControl，当我们决定绑定到哪个属性时，我们检查 ContentTemplate 和 ContentTemplateSelector (WPF)。如果它们都为 null，则没有为模型指定渲染器。因此，我们假设你要使用 ViewModel-First 工作流程。我们通过让 GetBindableProperty Func 返回 View.Model 作为要绑定的属性。其它情况下，ContentControl 将绑定在 Content 属性上。在没有 ContentTemplate 的情况下选择 View.Model 属性，我们启用了丰富的组合。<br>
 
 > 我希望你会发现这些特殊的情况在你们思考的时候是有意义的。像往常一样，如果你不喜欢它们，你可以改变它们……</font>
 
@@ -321,7 +321,7 @@ As you might imagine, the BindProperties functionality is completely customizabl
 One of the common ways you will configure conventions is by adding new conventions to the system. Most commonly this will be in adding the Silverlight toolkit controls or the WP7 toolkit controls. Here’s an example of how you would set up an advanced convention for the WP7 Pivot control which would make it work like the WPF TabControl:
 
 ---
-> <font color="#63aebb" face="微软雅黑">如您所想，通过替换 ViewModelBinder 上的 Func，可以完全自定义 BindProperties 功能。如果您喜欢 Action 约定而不是 Property 约定，那么您可以将 Func 替换为不执行任何操作的 Func。您可能需要更细粒度的控制。幸运的是，ConventionManager 或特定 ElementConvention 的几乎每个方面都是可定制的。有关 ConventionManager 的更多详细信息如下。<br>
+> <font color="#63aebb" face="微软雅黑">如你所想，通过替换 ViewModelBinder 上的 Func，可以完全自定义 BindProperties 功能。如果你喜欢 Action 约定而不是 Property 约定，那么你可以将 Func 替换为不执行任何操作的 Func。你可能需要更细粒度的控制。幸运的是，ConventionManager 或特定 ElementConvention 的几乎每个方面都是可定制的。有关 ConventionManager 的更多详细信息如下。<br>
 
 > 配置约定的常用方法之一是向系统添加新约定。最常见的是添加Silverlight工具包控件或WP7工具包控件。下面是一个如何为WP7 Pivot控件设置高级约定的示例，它将使其像WPF TabControl一样工作：</font>
 
@@ -349,7 +349,7 @@ BindProperties 仅由 ViewModelBinder 使用。
 If you’ve read this far, you know that the ConventionManager is leveraged heavily by the Action and Property binding mechanisms. It is the gateway to fine-tuning the majority of the convention behavior in the framework. What follows is a list of the replaceable Funcs and Properties which you can use to customize the conventions of the framework:
 
 ---
-> <font color="#63aebb" face="微软雅黑">如果您已经阅读过这篇文章，那么您就会知道，ActionManager和Property绑定机制会大量使用ConventionManager。它是微调框架中大多数约定行为的门户。以下是可替换的Func和Properties列表，您可以使用它们来自定义框架的约定：</font>
+> <font color="#63aebb" face="微软雅黑">如果你已经阅读过这篇文章，那么你就会知道，ActionManager和Property绑定机制会大量使用ConventionManager。它是微调框架中大多数约定行为的门户。以下是可替换的Func和Properties列表，你可以使用它们来自定义框架的约定：</font>
 
 ##### Properties - 属性
 
@@ -464,4 +464,4 @@ In the case mentioned above, the first parameter value of Rating.ValueProperty t
 ---
 > <font color="#63aebb" face="微软雅黑">在上面提到的情况中，Rating.ValueProperty 的第一个参数值告诉约定系统该元素的默认可绑定属性是什么。因此，如果我们在 Rating 控件上有一个约定匹配，我们就设置了对 ValueProperty 的绑定。第二个参数表示要在 Action 绑定中使用的默认属性。因此，如果使用指向 Rating 控件的 ElementName 创建动作绑定，但未指定属性，则返回 “Value” 属性。最后，第三个参数表示控件的默认事件。因此，如果我们将操作附加到评级控件，但未指定事件来触发该操作，则系统将回退到 “ValueChanged” 事件。</font>
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[View / ViewModel Naming Conventions - 视图/视图模型命名约定](./naming-conventions)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[View / ViewModel Naming Conventions - 视图/视图模型命名约定](./naming-conventions.md)

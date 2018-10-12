@@ -16,13 +16,13 @@ Previously, I mentioned that there was one more compelling feature of the Action
 Here’s one way you can thing about it: Imagine being able to execute a method, then pause it’s execution on some statement, go do something else, then come back and resume execution where you left off. This technique is extremely powerful in task-based programming, especially when those tasks need to run asynchronously. For example, let’s say we have a ViewModel that needs to call a web service asynchronously, then it needs to take the results of that, do some work on it and call another web service asynchronously. Finally, it must then display the result in a modal dialog and respond to the user’s dialog selection with another asynchronous task. Accomplishing this with the standard event-driven async model is not a pleasant experience. However, this is a simple task to accomplish by using coroutines. The problem…C# doesn’t implement coroutines natively. Fortunately, we can (sort of) build them on top of iterators.
 
 ---
-><font color="#63aebb" face="微软雅黑">这里有一种方法:想象一下执行一个方法，然后暂停它在某个语句上的执行，执行其他操作，然后返回并恢复您停止的执行。这种技术在基于任务的编程中非常强大，特别是当这些任务需要异步运行时。假设我们有一个 ViewModel，它需要异步调用 Web 服务，然后它需要获取它的结果，对它做一些工作，然后异步调用另一个 Web 服务。然后在模态对话框中显示结果，并用另一个异步任务响应用户的对话框选择。用标准事件驱动异步模型完成这一过程不是一个令人愉快的体验。这是一个通过使用协同程序来完成的简单任务。问题是，C# 本身并没有实现协程。幸运的是，我们可以(某种程度上)在迭代器之上构建它们。</font>
+><font color="#63aebb" face="微软雅黑">这里有一种方法:想象一下执行一个方法，然后暂停它在某个语句上的执行，执行其他操作，然后返回并恢复你停止的执行。这种技术在基于任务的编程中非常强大，特别是当这些任务需要异步运行时。假设我们有一个 ViewModel，它需要异步调用 Web 服务，然后它需要获取它的结果，对它做一些工作，然后异步调用另一个 Web 服务。然后在模态对话框中显示结果，并用另一个异步任务响应用户的对话框选择。用标准事件驱动异步模型完成这一过程不是一个令人愉快的体验。这是一个通过使用协同程序来完成的简单任务。问题是，C# 本身并没有实现协程。幸运的是，我们可以(某种程度上)在迭代器之上构建它们。</font>
 
 
 There are two things necessary to take advantage of this feature in Caliburn.Micro: First, implement the IResult interface on some class, representing the task you wish to execute; Second, yield instances of IResult from an Action2. Let’s make this more concrete. Say we had a Silverlight application where we wanted to dynamically download and show screens not part of the main package. First we would probably want to show a “Loading” indicator, then asynchronously download the external package, next hide the “Loading” indicator and finally navigate to a particular screen inside the dynamic module. Here’s what the code would look like if your first screen wanted to use coroutines to navigate to a dynamically loaded second screen:
 
 ---
-><font color="#63aebb" face="微软雅黑">要利用 Caliburn.Micro 中的这个特性，有两件事是必要的:首先，在某些类上实现IResult接口，表示您希望执行的任务;其次，生成来自 Action2 的 IResult 实例。让我们更具体一点，假设我们有一个 Silverlight 应用程序，我们想动态下载并显示屏幕，而不是主包的一部分。首先，我们可能希望显示一个 “加载” 提示，然后异步下载外部包，接下来隐藏 “加载” 提示，最后导航到动态模块中的特定屏幕。如果您的第一个屏幕想要使用协程导航到动态加载的第二个屏幕，那么下面是代码的样子:</font>
+><font color="#63aebb" face="微软雅黑">要利用 Caliburn.Micro 中的这个特性，有两件事是必要的:首先，在某些类上实现IResult接口，表示你希望执行的任务;其次，生成来自 Action2 的 IResult 实例。让我们更具体一点，假设我们有一个 Silverlight 应用程序，我们想动态下载并显示屏幕，而不是主包的一部分。首先，我们可能希望显示一个 “加载” 提示，然后异步下载外部包，接下来隐藏 “加载” 提示，最后导航到动态模块中的特定屏幕。如果你的第一个屏幕想要使用协程导航到动态加载的第二个屏幕，那么下面是代码的样子:</font>
 
 ``` csharp
 using System.Collections.Generic;
@@ -44,7 +44,7 @@ public class ScreenOneViewModel
 First, notice that the Action “GoForward” has a return type of IEnumerable<IResult>. This is critical for using coroutines. The body of the method has four yield statements. Each of these yields is returning an instance of IResult. The first is a result to show the “Downloading” indicator, the second to download the xap asynchronously, the third to hide the “Downloading” message and the fourth to show a new screen from the downloaded xap. After each yield statement, the compiler will “pause” the execution of this method until that particular task completes. The first, third and fourth tasks are synchronous, while the second is asynchronous. But the yield syntax allows you to write all the code in a sequential fashion, preserving the original workflow as a much more readable and declarative structure. To understand a bit more how this works, have a look at the IResult interface:
 
 ---
-><font color="#63aebb" face="微软雅黑">首先，注意动作“GoForward”有一个返回类型为IEnumerable。这是使用协同程序的关键。该方法的主体有四个yield语句。这些结果中的每一个都返回一个IResult实例。第一个结果显示“下载”指示符，第二个结果显示异步下载xap，第三个结果隐藏“下载”消息，第四个结果显示下载xap的新屏幕。在每个yield语句之后，编译器将“暂停”此方法的执行，直到该特定任务完成为止。第一、第三和第四任务是同步的，而第二任务是异步的。但是yield语法允许您以顺序的方式编写所有代码，并将原始工作流保留为更具可读性和声明性的结构。要进一步了解它的工作原理，请查看IResult接口:</font>
+><font color="#63aebb" face="微软雅黑">首先，注意动作“GoForward”有一个返回类型为IEnumerable。这是使用协同程序的关键。该方法的主体有四个yield语句。这些结果中的每一个都返回一个IResult实例。第一个结果显示“下载”指示符，第二个结果显示异步下载xap，第三个结果隐藏“下载”消息，第四个结果显示下载xap的新屏幕。在每个yield语句之后，编译器将“暂停”此方法的执行，直到该特定任务完成为止。第一、第三和第四任务是同步的，而第二任务是异步的。但是yield语法允许你以顺序的方式编写所有代码，并将原始工作流保留为更具可读性和声明性的结构。要进一步了解它的工作原理，请查看IResult接口:</font>
 
 ``` csharp
 public interface IResult
@@ -57,7 +57,7 @@ public interface IResult
 It’s a fairly simple interface to implement. Simply write your code in the “Execute” method and be sure to raise the “Completed” event when you are done, whether it be a synchronous or an asynchronous task. Because coroutines occur inside of an Action, we provide you with an ActionExecutionContext useful in building UI-related IResult implementations. This allows the ViewModel a way to declaratively state its intentions in controlling the view without having any reference to a View or the need for interaction-based unit testing. Here’s what the ActionExecutionContext looks like:
 
 ---
-><font color="#63aebb" face="微软雅黑">这是一个简单的接口实现。只需在 “Execute” 方法中编写代码，并确保在完成时引发 “Completed” 事件，无论是同步任务还是异步任务。因为协同作用发生在操作内部，所以我们为您提供了一个 ActionExecutionContext，它在构建与 UI 相关的 IResult 实现时非常有用。这使得 ViewModel 可以声明其控制视图的意图，而不需要引用视图或基于交互的单元测试。下面是 ActionExecutionContext 的样子:</font>
+><font color="#63aebb" face="微软雅黑">这是一个简单的接口实现。只需在 “Execute” 方法中编写代码，并确保在完成时引发 “Completed” 事件，无论是同步任务还是异步任务。因为协同作用发生在操作内部，所以我们为你提供了一个 ActionExecutionContext，它在构建与 UI 相关的 IResult 实现时非常有用。这使得 ViewModel 可以声明其控制视图的意图，而不需要引用视图或基于交互的单元测试。下面是 ActionExecutionContext 的样子:</font>
 
 ``` csharp
 public class ActionExecutionContext
@@ -240,7 +240,7 @@ Caliburn.Micro’s enumerator checks these properties after it get’s called ba
 Another thing you can do is create a series of IResult implementations built around your application’s shell. That is what the ShowScreen result used above does. Here is its implementation:
 
 ---
-><font color="#63aebb" face="微软雅黑">Caliburn.Micro 枚举器从每个 IResult 调用后获取属性进行检查。如果存在错误或 WasCancelled = true，则停止执行。你可以利用这一点。假设您为 OpenFileDialog 创建了一个 IResult，您可以检查该对话框的结果，如果用户取消了对话框，那么将EventArgs WasCancelled 设置为取消。你可以编写一个活动，该活动假定如果 Dialog.Show 后面的代码执行，用户必须选择了一个文件。这种技术可以简化这种情况下的逻辑。显然，您可以对 SaveFileDialog 或任何确认样式消息框使用相同的技术。上面显示的 LoadCatalog 实现中我最喜欢的部分是最初的实现是由 CM 用户编写的!感谢janoveh，感谢你给了我这么棒的作品!作为补充说明，我们向 CM 项目站点添加的内容之一是 “Recipes” 部分。在接下来的几个月里，我们将在这一领域增加更多常见的解决方案。因此，这将是一个很酷的插件和框架定制的好地方。
+><font color="#63aebb" face="微软雅黑">Caliburn.Micro 枚举器从每个 IResult 调用后获取属性进行检查。如果存在错误或 WasCancelled = true，则停止执行。你可以利用这一点。假设你为 OpenFileDialog 创建了一个 IResult，你可以检查该对话框的结果，如果用户取消了对话框，那么将EventArgs WasCancelled 设置为取消。你可以编写一个活动，该活动假定如果 Dialog.Show 后面的代码执行，用户必须选择了一个文件。这种技术可以简化这种情况下的逻辑。显然，你可以对 SaveFileDialog 或任何确认样式消息框使用相同的技术。上面显示的 LoadCatalog 实现中我最喜欢的部分是最初的实现是由 CM 用户编写的!感谢janoveh，感谢你给了我这么棒的作品!作为补充说明，我们向 CM 项目站点添加的内容之一是 “Recipes” 部分。在接下来的几个月里，我们将在这一领域增加更多常见的解决方案。因此，这将是一个很酷的插件和框架定制的好地方。
 
 >你可以做的另一件事是围绕应用程序的外壳创建一系列 IResult 实现。这就是上面使用的ShowScreen结果所做的。下面是它的实现:</font>
 
@@ -288,7 +288,7 @@ public class ShowScreen : IResult
 This bring up another important feature of IResult. Before CM executes a result, it passes it through the IoC.BuildUp method allowing your container the opportunity to push dependencies in through the properties. This allows you to create them normally within your view models, while still allowing them to take dependencies on application services. In this case, we depend on IShell. You could also have your container injected, but in this case I chose to use the IoC static class internally. As a general rule, you should avoid pulling things from the container directly. However, I think it is acceptable when done inside of infrastructure code such as a ShowScreen IResult.
 
 ---
-><font color="#63aebb" face="微软雅黑">这引出了 IResult 的另一个重要特性。在CM执行一个结果之前，它通过 IoC.BuildUp 方法传递，允许容器有机会通过属性将依赖项注入其中。这允许您正常地在视图模型中创建它们，同时仍然允许它们依赖于应用程序服务。在这种情况下，我们依赖于 IShell。您也可以将容器注入，但在本例中，我选择在内部使用IoC静态类。一般来说，您应该避免直接从容器中取出东西。但是，我认为在基础架构代码(如ShowScreen IResult)内部执行是可以接受的。</font>
+><font color="#63aebb" face="微软雅黑">这引出了 IResult 的另一个重要特性。在CM执行一个结果之前，它通过 IoC.BuildUp 方法传递，允许容器有机会通过属性将依赖项注入其中。这允许你正常地在视图模型中创建它们，同时仍然允许它们依赖于应用程序服务。在这种情况下，我们依赖于 IShell。你也可以将容器注入，但在本例中，我选择在内部使用IoC静态类。一般来说，你应该避免直接从容器中取出东西。但是，我认为在基础架构代码(如ShowScreen IResult)内部执行是可以接受的。</font>
 
 ### Other Usages - 其他用法
 Out-of-the-box Caliburn.Micro can execute coroutines automatically for any action invoked via an ActionMessage. However, there are times where you may wish to take advantage of the coroutine feature directly. To execute a coroutine, you can use the static Coroutine.BeginExecute method.
@@ -296,9 +296,9 @@ Out-of-the-box Caliburn.Micro can execute coroutines automatically for any actio
 I hope this gives some explanation and creative ideas for what can be accomplished with IResult. Be sure to check out the sample application attached. There’s a few other interesting things in there as well.
 
 ---
-><font color="#63aebb" face="微软雅黑">开箱即用的 Caliburn.Micro 可以为通过 ActionMessage 调用的任何操作自动执行协程。然而，有时您可能希望直接利用协同工作特性。要执行协同程序，可以使用静态 Coroutine.BeginExecute 方法。</font>
+><font color="#63aebb" face="微软雅黑">开箱即用的 Caliburn.Micro 可以为通过 ActionMessage 调用的任何操作自动执行协程。然而，有时你可能希望直接利用协同工作特性。要执行协同程序，可以使用静态 Coroutine.BeginExecute 方法。</font>
 
 ---
 ><font color="#63aebb" face="微软雅黑">我希望这能为IResult所能做到的提供一些解释和创造性的想法。请务必查看附件中的示例应用程序。还有一些其他有趣的东西在那里。</font>
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Screens, Conductors and Composition - 屏幕,引导和组件](./composition)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Screens, Conductors and Composition - 屏幕,引导和组件](./composition.md)

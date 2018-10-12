@@ -6,7 +6,7 @@ title: View / View Model Naming Conventions
 After receiving feedback about View and ViewModel resolution in Caliburn Micro, we have added new capabilities to make type resolution simpler while maintaining the robust regular expression-based name transformation mechanism that drives it. To get a better understanding about these new capabilities and how type resolution, in general, works in the framework, it's an appropriate time to describe in detail the naming conventions that the framework supports out-of-the-box. As you should already know by now, the framework depends considerably on naming conventions, and in type resolution specifically there are two different naming conventions to consider: the convention for naming the type itself and the convention for naming the namespace of the type.
 
 ---
-> <font color="#63aebb" face="微软雅黑">在 Caliburn Micro 中收到有关 View 和 ViewModel 分辨率的反馈后，我们添加了新的功能，使类型解析更简单，同时保持驱动它的强大的基于正则表达式的名称转换机制。为了更好地理解这些新功能以及类型解析通常如何在框架中工作，现在是详细描述框架支持开箱即用的命名约定的适当时机。现在您应该已经知道，框架很大程度上依赖于命名约定，在类型解析中，有两种不同的命名约定要考虑:命名类型本身的约定和命名类型名称空间的约定。</font>
+> <font color="#63aebb" face="微软雅黑">在 Caliburn Micro 中收到有关 View 和 ViewModel 分辨率的反馈后，我们添加了新的功能，使类型解析更简单，同时保持驱动它的强大的基于正则表达式的名称转换机制。为了更好地理解这些新功能以及类型解析通常如何在框架中工作，现在是详细描述框架支持开箱即用的命名约定的适当时机。现在你应该已经知道，框架很大程度上依赖于命名约定，在类型解析中，有两种不同的命名约定要考虑:命名类型本身的约定和命名类型名称空间的约定。</font>
 
 ### Naming Conventions for Name of a Type - 类型名称的命名约定
 
@@ -37,7 +37,7 @@ If you examine closely, you'll see that there is a subtle difference between the
 One limitation of the standard naming conventions supported by the framework is that there isn't consideration for different languages or even different terminologies within English. Although "View" and "ViewModel" can be assumed to be universally understood, as they are both important aspects of the MVVM design pattern that Caliburn Micro is dedicated to, a word like "Page" is not. Therefore, a robust framework would at least allow for supporting additional "View name suffixes" (e.g. "Pagina", "Seite", "Form", "Screen") through customization.
 
 ---
-> <font color="#63aebb" face="微软雅黑">如果仔细研究，您会发现上述两个约定之间存在细微差别。“ViewModel” 只是添加到一个以 “Page” 为后缀的名称中。但是，只有 “Model” 被添加到“View” 后缀的名称中，以生成其相应的 ViewModel 名称。这种差异主要源于命名 “MainViewViewModel” 而不是 “MainPageViewModel” 的语义尴尬。从“View”-后缀 View名称派生的 ViewModel 的命名约定通过将 ViewModel 命名为 “MainViewModel” 来避免冗余。</font>
+> <font color="#63aebb" face="微软雅黑">如果仔细研究，你会发现上述两个约定之间存在细微差别。“ViewModel” 只是添加到一个以 “Page” 为后缀的名称中。但是，只有 “Model” 被添加到“View” 后缀的名称中，以生成其相应的 ViewModel 名称。这种差异主要源于命名 “MainViewViewModel” 而不是 “MainPageViewModel” 的语义尴尬。从“View”-后缀 View名称派生的 ViewModel 的命名约定通过将 ViewModel 命名为 “MainViewModel” 来避免冗余。</font>
 
 > <font color="#63aebb" face="微软雅黑">框架支持的标准命名约定的一个限制是在英语中不考虑不同的语言甚至不同的术语。尽管可以假设“View”和“ViewModel”被普遍理解，因为它们都是Caliburn Micro专用的MVVM设计模式的重要方面，但“Page”这样的词却不是。因此，一个健壮的框架应该可以通过定制支持额外的“View名称后缀”（例如“Pagina”，“Seite”，“Form”，“Screen”）。
 </font>
@@ -87,7 +87,7 @@ While all the Views and ViewModels of many applications may reside in a single a
 While the convention above covers many possibilities in terms of how deeply-nested namespaces may be, it does, however, assume a parallel structure in the organizational scheme of both the Views and ViewModels. Furthermore, it is also quite common to place Views and ViewModels into separate assemblies, which makes the likelihood of parallel organization across different assemblies even less likely.
 
 ---
-> <font color="#63aebb" face="微软雅黑">虽然上面的约定涵盖了关于命名空间嵌套深度的许多可能性，但是它在 Views 和 ViewModels 的组织方法中假设了一个并行结构。此外，将Views和ViewModel放入单独的程序集中也很常见，这使得跨不同程序集的并行组织的可能性更小。</font>
+> <font color="#63aebb" face="微软雅黑">虽然上面的约定涵盖了关于命名空间嵌套深度的许多可能性，但是它在 Views 和 ViewModels 的组织方法中假设了一个并行结构。此外，将 Views 和 ViewModel 放入单独的程序集中也很常见，这使得跨不同程序集的并行组织的可能性更小。</font>
 
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Handling Custom Conventions - 自定义处理约定](./custom-conventions)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Handling Custom Conventions - 自定义处理约定](./custom-conventions.md)

@@ -35,7 +35,7 @@ title: Cheat Sheet
 
 <dl>
 	<dt>$eventArgs</dt>
-	<dd>将 EventArgs 或输入参数传递给您的操作。注意:对于保护方法，这将为null，因为触发器实际上并没有发生.</dd>
+	<dd>将 EventArgs 或输入参数传递给你的操作。注意:对于保护方法，这将为null，因为触发器实际上并没有发生.</dd>
 	<dt>$dataContext</dt>
 	<dd>传递 ActionMessage 附加到的元素的 DataContext 。这在主/明细场景中非常有用，在这些场景中，ActionMessage 可能会冒泡到父 VM，但需要携带要执行操作的子实例.</dd>
 	<dt>$source</dt>
@@ -118,4 +118,4 @@ public class MyEvent {
 }
 ```
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Migrating to 2.0.0 - 迁移到2.0.0](./migrating-to-2.0.0.md)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Migrating to 2.0.0 - 迁移到2.0.0](./migrating-to-2.0.0.md)

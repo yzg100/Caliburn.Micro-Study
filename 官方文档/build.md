@@ -12,6 +12,6 @@ Caliburn.Micro uses Git for source control. I highly recommend that you use the 
 4. Press Ctrl+Shift+B (or use the Build menu) to build the solution.
 5. The assemblies will be generated in the `bin` directory under the root of the repository.
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Nuget](./nuget)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Nuget](./nuget.md)
 
 [gd]: https://desktop.github.com/

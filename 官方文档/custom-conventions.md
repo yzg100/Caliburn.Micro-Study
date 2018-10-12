@@ -24,7 +24,7 @@ Before introducing these new methods of the locator classes, it would be appropr
 **Type mapping** is a term to describe the new capabilities that were added to the locator classes. Creating a type mapping is considered a higher-level operation because type mappings contemplate the two facets of type resolution: resolving the type's name and resolving the type's namespace. Although a type mapping is ultimately expressed as a transformation rule for the NameTransformer, the methods for creating type mappings were intended to relieve you of having to understand regular expressions in addition to being more domain-specific.
 
 ---
-> <font color="#63aebb" face="微软雅黑">类型映射 - 是用于描述添加到定位器类的新功能的术语。创建类型映射被认为是更高级别的操作，因为类型映射考虑了类型解析的两个方面：解析类型的名称并解析类型的命名空间。虽然类型映射最终表示为 NameTransformer 的转换规则，但创建类型映射的方法旨在减轻您必须理解正则表达式以及更具域特性。</font>
+> <font color="#63aebb" face="微软雅黑">类型映射 - 是用于描述添加到定位器类的新功能的术语。创建类型映射被认为是更高级别的操作，因为类型映射考虑了类型解析的两个方面：解析类型的名称并解析类型的命名空间。虽然类型映射最终表示为 NameTransformer 的转换规则，但创建类型映射的方法旨在减轻你必须理解正则表达式以及更具域特性。</font>
 
 ### Configuration of Type Mappings - 类型映射配置
 
@@ -426,4 +426,4 @@ ViewLocator.AddTypeMapping(rxrep, null, rxtgt);
 //Resolves: MyApp.Some.Name.Space.ViewModels.TestViewModel -> Views.MyApp.Some.Name.Space.TestView
 ```
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Using the NameTransformer - 使用NameTransformer](./name-transformer)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Using the NameTransformer - 使用NameTransformer](./name-transformer.md)

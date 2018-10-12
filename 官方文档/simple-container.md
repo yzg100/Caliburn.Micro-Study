@@ -273,4 +273,4 @@ Do remember that due to the nature of singleton and instance registrations that 
 ---
 ><font color="#63aebb" face="微软雅黑">请记住，由于单例和实例注册的性质，两个容器将有效地访问同一个实例。这允许实现复杂的注册场景。</font>
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[Service Locator - 服务定位](./service-locator)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Service Locator - 服务定位](./service-locator.md)

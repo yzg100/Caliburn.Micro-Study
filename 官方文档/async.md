@@ -17,7 +17,7 @@ With .NET 4.0 Microsoft added Task to the .NET Framework for better supporting p
 Instead of registering an callback when a coroutine is completed you now can await it:
 
 ---
-><font color="#63aebb" face="微软雅黑">在完成协同程序时，您现在可以等待它，而不是注册回调：</font>
+><font color="#63aebb" face="微软雅黑">在完成协同程序时，你现在可以等待它，而不是注册回调：</font>
 
 ``` csharp
 public static class Coroutine {
@@ -78,4 +78,4 @@ And finally also EventAggregator supports Task with the IHandleWithTask<TMessage
 ---
 ><font color="#63aebb" face="微软雅黑">最后，EventAggregator还支持使用IHandleWithTask的Task 接口。</font>
 
-[目录](index)
+[目录](.index.md)

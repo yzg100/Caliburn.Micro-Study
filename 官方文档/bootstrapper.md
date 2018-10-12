@@ -3,10 +3,10 @@ layout: page
 title: Customizing The Bootstrapper
 ---
 
-In the [last part](./configuration) we discussed the most basic configuration for Caliburn.Micro and demonstrated a couple of simple features related to Actions and Conventions. In this part, I would like to explore the Bootstrapper class a little more. Let’s begin by configuring our application to use an IoC container. We’ll use MEF for this example, but Caliburn.Micro will work well with any container. First, go ahead and grab the code from Part 1. We are going to use that as our starting point. Add two additional references: System.ComponentModel.Composition and System.ComponentModel.Composition.Initialization. Those are the assemblies that contain MEF’s functionality. Now, let’s create a new Bootstrapper called MefBootstrapper. Use the following code:
+In the [last part](./configuration.md) we discussed the most basic configuration for Caliburn.Micro and demonstrated a couple of simple features related to Actions and Conventions. In this part, I would like to explore the Bootstrapper class a little more. Let’s begin by configuring our application to use an IoC container. We’ll use MEF for this example, but Caliburn.Micro will work well with any container. First, go ahead and grab the code from Part 1. We are going to use that as our starting point. Add two additional references: System.ComponentModel.Composition and System.ComponentModel.Composition.Initialization. Those are the assemblies that contain MEF’s functionality. Now, let’s create a new Bootstrapper called MefBootstrapper. Use the following code:
 
 ---
-><font color="#63aebb" face="微软雅黑">在[最后一部分](./configuration)中，我们讨论了 Caliburn.Micro 的最基本配置，并演示了一些与操作和约定相关的简单特性。在这一部分中，我将进一步探讨 Bootstrapper 类。让我们从配置应用程序来使用 IoC 容器开始。在本例中，我们将使用 MEF， Caliburn.Micro 可以很好地适用于任何容器。首先，从第1部分获取代码。我们将以此为起点。添加两个额外的引用: System.ComponentModel.Composition 和System.ComponentModel.Composition.Initialization。这些是包含 MEF 功能的程序集。现在，让我们创建一个名为 MefBootstrapper 的新 Bootstrapper 实例。使用以下代码:</font>
+><font color="#63aebb" face="微软雅黑">在[最后一部分](./configuration.md)中，我们讨论了 Caliburn.Micro 的最基本配置，并演示了一些与操作和约定相关的简单特性。在这一部分中，我将进一步探讨 Bootstrapper 类。让我们从配置应用程序来使用 IoC 容器开始。在本例中，我们将使用 MEF， Caliburn.Micro 可以很好地适用于任何容器。首先，从第1部分获取代码。我们将以此为起点。添加两个额外的引用: System.ComponentModel.Composition 和System.ComponentModel.Composition.Initialization。这些是包含 MEF 功能的程序集。现在，让我们创建一个名为 MefBootstrapper 的新 Bootstrapper 实例。使用以下代码:</font>
 
 ``` csharp
 using System;
@@ -30,8 +30,7 @@ public class MefBootstrapper : BootstrapperBase
         container = CompositionHost.Initialize(
             new AggregateCatalog(
                 AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>()
-                )
-            );
+        ));
 
         var batch = new CompositionBatch();
 
@@ -96,7 +95,7 @@ After creating the container and providing it with the catalogs, I make sure to 
 After we configure the container, we need to tell Caliburn.Micro how to use it. That is the purpose of the three overrides that follow. “GetInstance” and “GetAllInstances” are required by the framework. “BuildUp” is optionally used to supply property dependencies to instances of IResult that are executed by the framework. 
 
 ---
-><font color="#63aebb" face="微软雅黑">您所要做的就是返回一个可搜索程序集的列表。默认情况下，基类返回应用程序存在的程序集。因此，如果所有视图都与应用程序在同一个程序集中，您甚至不需要担心这个问题。如果您有多个包含视图的引用程序集，那么您需要记住这个扩展点。另外，如果要动态加载模块，则需要确保它们在加载时注册到 IoC 容器和 AssemblySource.Instance 中。<br><br>
+><font color="#63aebb" face="微软雅黑">你所要做的就是返回一个可搜索程序集的列表。默认情况下，基类返回应用程序存在的程序集。因此，如果所有视图都与应用程序在同一个程序集中，你甚至不需要担心这个问题。如果你有多个包含视图的引用程序集，那么你需要记住这个扩展点。另外，如果要动态加载模块，则需要确保它们在加载时注册到 IoC 容器和 AssemblySource.Instance 中。<br><br>
 
 >在创建容器并向其提供目录之后，我确保添加 Caliburn.Micro 特定服务。该框架提供了 IWindowManager 和 IEventAggregator 的默认实现。这些部分我可能会依赖于其他地方，所以我希望它们可以用于注入。我还注册了容器本身(只是个人喜好)。<br><br>
 
@@ -109,9 +108,9 @@ While Caliburn.Micro does provide ServiceLocator functionality through the Boots
 Besides what is shown above, there are some other notable methods on the Bootstrapper. You can override OnStartup and OnExit to execute code when the application starts or shuts down respectively and OnUnhandledException to cleanup after any exception that wasn’t specifically handled by your application code. The last override, DisplayRootView, is unique. Let’s look at how it is implemented in Bootstrapper\<TRootModel>
 
 ---
-><font color="#63aebb" face="微软雅黑">虽然 Caliburn.Micro 确实通过 Bootstrapper 的覆盖和 IoC 类提供了 ServiceLocator 功能，但是您应该避免在应用程序代码中直接使用它。许多人认为 ServiceLocator 是一个反模式。从容器中提取往往会模糊依赖代码的意图，并可能使测试更加复杂。在以后的文章中，我将至少演示一个场景，其中您可能希望从 ViewModel 访问 ServiceLocator。我还将演示  solutions.2
+><font color="#63aebb" face="微软雅黑">虽然 Caliburn.Micro 确实通过 Bootstrapper 的覆盖和 IoC 类提供了 ServiceLocator 功能，但是你应该避免在应用程序代码中直接使用它。许多人认为 ServiceLocator 是一个反模式。从容器中提取往往会模糊依赖代码的意图，并可能使测试更加复杂。在以后的文章中，我将至少演示一个场景，其中你可能希望从 ViewModel 访问 ServiceLocator。我还将演示  solutions.2
 
->除了上面显示的内容，Bootstrapper 上还有一些其他值得注意的方法。您可以在应用程序启动或关闭时重写 OnStartup 和 OnExit，以执行代码;在应用程序代码没有特别处理的任何异常之后，执行 OnUnhandledException。最后一个重载 DisplayRootView 是唯一的。让我们看看如何在 Bootstrapper\<TRootModel> 中实现它。</font>
+>除了上面显示的内容，Bootstrapper 上还有一些其他值得注意的方法。你可以在应用程序启动或关闭时重写 OnStartup 和 OnExit，以执行代码;在应用程序代码没有特别处理的任何异常之后，执行 OnUnhandledException。最后一个重载 DisplayRootView 是唯一的。让我们看看如何在 Bootstrapper\<TRootModel> 中实现它。</font>
 
 ``` csharp
 protected override void DisplayRootView() 
@@ -172,4 +171,4 @@ Finally, make sure to update your App.xaml and change the HelloBootstrapper to M
 
 Caliburn.Micro can be used from non-Xaml hosts. In order to accomplish this, you must follow a slightly different procedure, since your application does not initiate via the App.xaml. Instead, create a custom boostrapper by inheriting from BoostrapperBase (the non-generic version). When you inherit, you should pass "false" to the base constructor's "useApplication" parameter. This allows the bootstrapper to properly configure Caliburn.Micro without the presence of a Xaml application instance. All you need to do to start the framework is create an instance of your Bootstrapper and call the Initialize() method. Once the class is instantiated, you can use Caliburn.Micro like normal, probably by invoke the IWindowManager to display new UI.
 
-[目录](index)&nbsp;&nbsp;|&nbsp;&nbsp;[All about Actions - 所有操作](./actions)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[All about Actions - 所有操作](./actions.md)
