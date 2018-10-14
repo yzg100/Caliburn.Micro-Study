@@ -301,4 +301,4 @@ I hope this gives some explanation and creative ideas for what can be accomplish
 ---
 ><font color="#63aebb" face="微软雅黑">我希望这能为IResult所能做到的提供一些解释和创造性的想法。请务必查看附件中的示例应用程序。还有一些其他有趣的东西在那里。</font>
 
-[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Screens, Conductors and Composition - 屏幕,引导和组件](./composition.md)
+[目录](./index.md)&nbsp;&nbsp;|&nbsp;&nbsp;[Screens, Conductors and Composition - 屏幕,指挥和组件](./composition.md)

@@ -16,7 +16,7 @@ title: Documentation
     - [Working with Windows Phone (Silverlight) - 可用于Windows Phone(Silverlight)](./windows-phone.md)
     - [Working with Windows RT (Windows 8 and Windows Phone 8.1) - 可用于WindowsRT (Windows 8 和 Windows Phone 8.1)](./windows-runtime.md)
     - [IResult and Coroutines - IResult 和 协同程序](./coroutines.md)
-    - [Screens, Conductors and Composition - 屏幕,引导和组件](./composition.md)
+    - [Screens, Conductors and Composition - 屏幕,指挥和组件](./composition.md)
     - [All About Conventions - 约定](./conventions.md)
         - [View / ViewModel Naming Conventions - 视图/视图模型命名约定](./naming-conventions.md)
         - [Handling Custom Conventions - 自定义处理约定](./custom-conventions.md)
