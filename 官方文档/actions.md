@@ -326,7 +326,7 @@ Now our shell has a collection of Model instances along with the ability to add 
     <StackPanel>
         <ItemsControl x:Name="Items">
             <ItemsControl.ItemTemplate>
-                <DataTemplate>,f
+                <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Button Content="Remove" cal:Message.Attach="Remove($dataContext)" />
                         <TextBlock Text="{Binding Id}" />

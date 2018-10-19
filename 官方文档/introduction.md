@@ -23,7 +23,7 @@ The Action mechanism allows you to “bind” UI triggers, such as a Button’s 
 Out of the box, we support a set of binding conventions around the ActionMessage feature. These conventions are based on x:Name. So, if you have a method called “Save” on your ViewModel and a Button named “Save” in your UI, we will automatically create an EventTrigger for the “Click” event and assign an ActionMessage for the “Save” method. Furthermore, we will inspect the method’s signature and properly construct the ActionMessage parameters. This mechanism can be turned off or customized. You can even change or add conventions for different controls. For example, you could make the convention event for Button “MouseMove” instead of “Click” if you really wanted.
 
 ---
-><font color="#63aebb" face="微软雅黑">开箱即用，支持 ActionMessage 特性的绑定约定,约定基于x:Name。因此，如果 ViewModel 上有一个名为 “Save” 的方法，UI中有一个名为 “Save” 的Button，我们将将自动为 “Click” 事件创建 EventTrigger，并为 “Save” 方法分配一个 ActionMessage。此外，我们将检查方法的签名并正确构造 ActionMessage 参数。这个机制可以关闭或自定义。你甚至可以为不同的控件添加或修改约定。例如:你可以将 Button 约定事件设置为 “MouseMove” 而不是 “Click”。</font>
+><font color="#63aebb" face="微软雅黑">开箱即用，支持 ActionMessage 特性的绑定约定,约定基于x:Name。因此，如果 ViewModel 上有一个名为 “Save” 的方法，UI中有一个名为 “Save” 的Button，我们将自动为 “Click” 事件创建 EventTrigger，并为 “Save” 方法分配一个 ActionMessage。此外，我们将检查方法的签名并正确构造 ActionMessage 参数。这个机制可以关闭或自定义。你甚至可以为不同的控件添加或修改约定。例如:你可以将 Button 约定事件设置为 “MouseMove” 而不是 “Click”。</font>
 
 ### Binding Conventions - 绑定约定 
 We also support convention-based databinding. This too works with x:Name. If you have a property on your ViewModel with the same name as an element, we will attempt to databind them. Whereas the framework understands convention events for Actions, it additionally understands convention binding properties (which you can customize or extend). When a binding name match occurs, we then proceed through several steps to build up the binding (all of which are customizable), configuring such details as BindingMode, StringFormat, ValueConverter, Validation and UpdateSourceTrigger (works for SL TextBox and PasswordBox too). Finally, we support the addition of custom behaviors for certain scenarios. This allows us to detect whether we need to auto-generate a DataTemplate or wire both the ItemsSource and the SelectedItem of a Selector based on naming patterns.
@@ -31,7 +31,7 @@ We also support convention-based databinding. This too works with x:Name. If you
 ---
 ><font color="#63aebb" face="微软雅黑">支持基于约定的数据绑定。这也适用于x:Name。如果 ViewModel 上有一个与元素同名的属性，我们将尝试进行数据绑定。框架理解 Actions 的约定事件，也明白约定绑定属性（你可以自定义或扩展）。当发现绑定名称匹配时，我们将执行几个步骤来构建绑定(所有这些步骤都是可定制的)，BindingMode、StringFormat、ValueConverter、Validation 和 UpdateSourceTrigger 等详细信息(也适用于 SL 的 TextBox 和 PasswordBox)。支持为特定场景添加定制行为。允许我们检测是否需要根据命名模式自动生成 DataTemplate 或者连接 ItemsSource 和SelectedItem 的选择器。</font>
 
-### Screens and Conductors - 屏幕和引导
+### Screens and Conductors - 屏幕和指挥
 The Screen, ScreenConductor and ScreenCollection patterns enable model-based tracking of the active or current item, enforcing of screen lifecycles and elegant shutdown or shutdown cancellation in an application. Caliburn.Micro’s implementation of these patterns is an evolution of the one found in Caliburn and supports conducting any type of class, not just implementations of IScreen. These improvements are being introduced back into Caliburn. You’ll find that Caliburn.Micro’s screen implementation is quite thorough and even handles asynchronous shutdown scenarios with ease.
 
 ---
